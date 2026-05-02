@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - TechnoMind</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/enhancements.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <script src="../js/lang.js"></script>
+    <script src="../js/db.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/main.js"></script>
+    <style>
+        .settings-section {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .settings-title {
+            color: var(--color-primary);
+            font-size: 18px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .avatar-grid {
+            display: flex;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .avatar-option {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            background: rgba(255, 255, 255, 0.1);
+            transition: all 0.2s;
+        }
+
+        .avatar-option:hover {
+            transform: scale(1.1);
+        }
+
+        .avatar-option.selected {
+            border-color: var(--color-primary);
+            background: rgba(56, 189, 248, 0.2);
+        }
+    </style>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../images/logo.svg">
+    <link rel="apple-touch-icon" href="../images/logo.png">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <a href="../index.html" class="logo"><img src="../images/logo.svg" style="height:40px; margin-left:8px;">
+                TechnoMind</a>
+            <nav class="nav-links">
+                <a href="../index.html">الرئيسية</a>
+                <a href="tools-directory.html">أدوات الذكاء الاصطناعي</a>
+                <button id="langBtn" class="lang-btn">English</button>
+            </nav>
+            <div class="header-actions">
+                <button class="icon-btn" onclick="toggleTheme()" id="themeBtn" aria-label="Toggle Theme">
+                    <svg class="icon-svg" viewBox="0 0 24 24" id="themeIconSvg">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+                <button class="icon-btn" onclick="toggleMainMenu()" aria-label="Toggle Menu">
+                    <svg class="icon-svg" viewBox="0 0 24 24">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="menu-dropdown" id="mainMenu">
+                <div class="menu-section-label">التنقل / Navigation</div>
+                <a href="../index.html" class="menu-item" data-en="Home">
+                    <svg class="menu-icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                    <span class="text">الرئيسية</span>
+                </a>
+                <a href="ai-simplified.html" class="menu-item" data-en="AI Simplified">
+                    <svg class="menu-icon" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"></path><path d="M12 8v4l3 3"></path></svg>
+                    <span class="text">الذكاء الاصطناعي</span>
+                </a>
+                <a href="courses.html" class="menu-item" data-en="Courses">
+                    <svg class="menu-icon" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c0 2 4 3 6 3s6-1 6-3v-5"></path></svg>
+                    <span class="text">الدورات التعليمية</span>
+                </a>
+                <a href="tools-directory.html" class="menu-item" data-en="AI Tools">
+                    <svg class="menu-icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+                    <span class="text">أدوات الذكاء الاصطناعي</span>
+                </a>
+                <a href="make-money.html" class="menu-item" data-en="Earn Online" style="color: var(--color-section-earn);">
+                    <svg class="menu-icon" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                    <span class="text">الربح من الإنترنت</span>
+                </a>
+                <div class="menu-divider"></div>
+                <div class="menu-section-label">الحساب / Account</div>
+                <a href="signup.html" class="menu-item" id="menu-login-item" data-en="Login / Register">
+                    <svg class="menu-icon" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    <span class="text">👤 تسجيل الدخول / حساب جديد</span>
+                </a>
+                <a href="contact.html?subject=support" class="menu-item" data-en="Support">
+                    <svg class="menu-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                    <span class="text">الدعم الفني</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <header class="hero-section"
+        style="min-height: 20vh; padding-top: 100px; padding-bottom: 40px; text-align: center;">
+        <h1 data-en="Settings & Preferences">الإعدادات والتفضيلات</h1>
+    </header>
+
+    <div class="container" style="max-width: 600px; margin-bottom: 80px;">
+
+        <!-- Profile Section -->
+        <div class="settings-section">
+            <h3 class="settings-title">
+                <span>👤</span> <span data-en="User Profile">الملف الشخصي</span>
+            </h3>
+            <p style="color: #ccc; font-size: 14px; margin-bottom: 16px;"
+                data-en="Set your name and avatar for reviews.">حدد اسمك وصورتك الرمزية للتعليقات.</p>
+
+            <label style="display: block; margin-bottom: 8px; color: white;" data-en="Display Name">الاسم
+                المعروض</label>
+            <input type="text" id="displayName" placeholder="Guest"
+                style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.3); color: white; margin-bottom: 16px;">
+
+            <label style="display: block; margin-bottom: 8px; color: white;" data-en="Avatar">الصورة الرمزية</label>
+            <div class="avatar-grid" id="avatarGrid">
+                <div class="avatar-option" data-avatar="🤖">🤖</div>
+                <div class="avatar-option" data-avatar="👨‍💻">👨‍💻</div>
+                <div class="avatar-option" data-avatar="👩‍💻">👩‍💻</div>
+                <div class="avatar-option" data-avatar="🚀">🚀</div>
+                <div class="avatar-option" data-avatar="👽">👽</div>
+            </div>
+
+            <button onclick="saveProfile()" class="btn btn-primary" style="margin-top: 20px; width: 100%;"
+                data-en="Save Profile">حفظ الملف الشخصي</button>
+        </div>
+
+        <!-- Appearance Section -->
+        <div class="settings-section">
+            <h3 class="settings-title">
+                <span>👁️</span> <span data-en="Appearance">المظهر</span>
+            </h3>
+
+            <div style="margin-bottom: 20px;">
+                <label style="display: block; margin-bottom: 8px; color: white;" data-en="Font Size">حجم الخط</label>
+                <div style="display: flex; gap: 10px;">
+                    <button onclick="setFontSize('small')" class="btn btn-secondary" style="flex: 1;">A-</button>
+                    <button onclick="setFontSize('medium')" class="btn btn-secondary" style="flex: 1;">A</button>
+                    <button onclick="setFontSize('large')" class="btn btn-secondary" style="flex: 1;">A+</button>
+                </div>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="color: white;" data-en="Reduce Motion">تقليل الحركة</span>
+                <input type="checkbox" id="reduceMotion" onchange="toggleMotion(this.checked)"
+                    style="width: 20px; height: 20px;">
+            </div>
+        </div>
+
+        <!-- App Preferences -->
+        <div class="settings-section">
+            <h3 class="settings-title">
+                <span>⚙️</span> <span data-en="Preferences">التفضيلات</span>
+            </h3>
+            <label style="display: block; margin-bottom: 8px; color: white;" data-en="Start Page">الصفحة
+                الرئيسية</label>
+            <select id="startPage" onchange="saveStartPage()"
+                style="width: 100%; padding: 12px; border-radius: 8px; background: rgba(0,0,0,0.3); color: white; border: 1px solid rgba(255,255,255,0.1);">
+                <option value="../index.html" data-en="Home">الرئيسية</option>
+                <option value="tools-directory.html" data-en="Tools Directory">دليل الأدوات</option>
+                <option value="favorites.html" data-en="My Favorites">مفضلاتي</option>
+            </select>
+        </div>
+
+        <!-- Data Section -->
+        <div class="settings-section" style="border-color: rgba(239, 68, 68, 0.3);">
+            <h3 class="settings-title" style="color: #ef4444;">
+                <span>🛡️</span> <span data-en="Data Management">إدارة البيانات</span>
+            </h3>
+
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <button onclick="exportData()" class="btn btn-secondary" style="flex: 1;"
+                    data-en="Export Favorites (JSON)">تصدير المفضلات</button>
+                <button onclick="clearData()" class="btn btn-secondary"
+                    style="flex: 1; background: rgba(239, 68, 68, 0.1); color: #ef4444; border-color: rgba(239, 68, 68, 0.3);"
+                    data-en="Factory Reset">حذف جميع البيانات</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Scripts for Settings Page -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadSettings();
+        });
+
+        function loadSettings() {
+            // Profile
+            const profile = JSON.parse(localStorage.getItem('tm_profile') || '{}');
+            document.getElementById('displayName').value = profile.name || '';
+
+            // Avatar Selection
+            const avatars = document.querySelectorAll('.avatar-option');
+            avatars.forEach(a => {
+                a.onclick = () => {
+                    avatars.forEach(opt => opt.classList.remove('selected'));
+                    a.classList.add('selected');
+                };
+                if (a.dataset.avatar === profile.avatar) a.classList.add('selected');
+            });
+
+            // Reduced Motion
+            const motion = localStorage.getItem('tm_reduce_motion') === 'true';
+            document.getElementById('reduceMotion').checked = motion;
+
+            // Start Page
+            const startPage = localStorage.getItem('tm_start_page');
+            if (startPage) document.getElementById('startPage').value = startPage;
+        }
+
+        function saveProfile() {
+            const name = document.getElementById('displayName').value;
+            const selectedAvatar = document.querySelector('.avatar-option.selected');
+            const avatar = selectedAvatar ? selectedAvatar.dataset.avatar : '🤖';
+
+            localStorage.setItem('tm_profile', JSON.stringify({ name, avatar }));
+
+            const isEn = document.documentElement.lang === 'en';
+            if(typeof showToast==='function'){showToast(isEn?'Profile Saved!':'تم حفظ الملف الشخصي!','success')}else{alert(isEn?'Profile Saved!':'تم حفظ الملف الشخصي!')}
+        }
+
+        function setFontSize(size) {
+            document.documentElement.setAttribute('data-font-size', size);
+            localStorage.setItem('tm_font_size', size);
+            // Apply immediately to body for preview
+            if (size === 'small') document.body.style.fontSize = '14px';
+            if (size === 'medium') document.body.style.fontSize = '16px';
+            if (size === 'large') document.body.style.fontSize = '18px';
+        }
+
+        function toggleMotion(enabled) {
+            localStorage.setItem('tm_reduce_motion', enabled);
+            if (enabled) document.body.classList.add('reduce-motion');
+            else document.body.classList.remove('reduce-motion');
+        }
+
+        function saveStartPage() {
+            const page = document.getElementById('startPage').value;
+            localStorage.setItem('tm_start_page', page);
+        }
+
+        function exportData() {
+            const favs = localStorage.getItem('tm_favorites');
+            const blob = new Blob([favs], { type: "application/json" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = "technomind_favorites.json";
+            a.click();
+        }
+
+        function clearData() {
+            const isEn = document.documentElement.lang === 'en';
+            if (confirm(isEn ? "Are you sure? This will wipe all reviews and favorites." : "هل أنت متأكد؟ سيتم حذف جميع المفضلات والتقييمات.")) {
+                localStorage.clear();
+                location.reload();
+            }
+        }
+    </script>
+    <script src="../js/enhancements.js"></script>
+</body>
+
+</html>

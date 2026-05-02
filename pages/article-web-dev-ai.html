@@ -1,0 +1,220 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إنشاء مواقع الويب بالذكاء الاصطناعي - TechnoMind عربي</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/enhancements.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../images/logo.svg">
+    <link rel="apple-touch-icon" href="../images/logo.png">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <a href="../index.html" class="logo">
+                <img src="../images/logo.svg" alt="TechnoMind" style="height: 40px; margin-left: 8px;"> TechnoMind
+            </a>
+            <nav class="nav-links">
+                <a href="../index.html" data-en="Home">الرئيسية</a>
+                <a href="ai-simplified.html" data-en="AI Simplified">الذكاء الاصطناعي</a>
+                <a href="courses.html" data-en="Courses">الدورات</a>
+                <a href="apps-tools.html" data-en="Tools">الأدوات</a>
+                <a href="tools-hub.html" data-en="Tools Hub">مركز الأدوات</a>
+                <a href="contact.html" data-en="Contact">اتصل بنا</a>
+            </nav>
+                        <div class="header-actions">
+                <!-- Language Toggle -->
+                <button class="icon-btn" onclick="toggleLanguage()" id="langBtn" title="Switch Language">
+                    <svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20"></path><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                    <span style="font-size: 14px; margin-right: 4px;">EN</span>
+                </button>
+
+                <!-- Theme Toggle -->
+                <button class="icon-btn" onclick="toggleTheme()" id="themeBtn" title="Toggle Theme"
+                    aria-label="Toggle Theme">
+                    <!-- Sun Icon (for dark mode by default) -->
+                    <svg class="icon-svg" viewBox="0 0 24 24" id="themeIconSvg">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+
+                <!-- Search Icon -->
+                <button class="icon-btn" aria-label="Search" onclick="toggleSearch()">
+                    <svg class="icon-svg" viewBox="0 0 24 24">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
+
+                <!-- Hamburger Menu -->
+                <button class="icon-btn" onclick="toggleMainMenu()" aria-label="Toggle Menu">
+                    <svg class="icon-svg" viewBox="0 0 24 24">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+            
+
+            <div class="menu-dropdown" id="mainMenu">
+                <!-- Main Navigation Links -->
+                <div class="menu-section-label">Ø§Ù„ØªÙ†Ù‚Ù„ / Navigation</div>
+                <a href="../index.html" class="menu-item" data-en="Home">
+                    <svg class="menu-icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                    <span class="text">Ø§Ù„Ø±Ø¦ÙŠØ³ÙŠØ©</span>
+                </a>
+                <a href="ai-simplified.html" class="menu-item" data-en="AI Simplified">
+                    <svg class="menu-icon" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"></path><path d="M12 8v4l3 3"></path></svg>
+                    <span class="text">Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ</span>
+                </a>
+                <a href="courses.html" class="menu-item" data-en="Courses">
+                    <svg class="menu-icon" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c0 2 4 3 6 3s6-1 6-3v-5"></path></svg>
+                    <span class="text">Ø§Ù„Ø¯ÙˆØ±Ø§Øª Ø§Ù„ØªØ¹Ù„ÙŠÙ…ÙŠØ©</span>
+                </a>
+                <a href="tools-directory.html" class="menu-item" data-en="AI Tools">
+                    <svg class="menu-icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+                    <span class="text">Ø£Ø¯ÙˆØ§Øª Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ</span>
+                </a>
+                <a href="make-money.html" class="menu-item" data-en="Earn Online" style="color: var(--color-section-earn);">
+                    <svg class="menu-icon" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                    <span class="text">Ø§Ù„Ø±Ø¨Ø­ Ù…Ù† Ø§Ù„Ø¥Ù†ØªØ±Ù†Øª</span>
+                </a>
+                <!-- Divider -->
+                <div class="menu-divider"></div>
+                <div class="menu-section-label">Ø§Ù„Ø­Ø³Ø§Ø¨ / Account</div>
+                <a href="signup.html" class="menu-item" id="menu-login-item" data-en="Login / Sign Up">
+                    <svg class="menu-icon" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    <span class="text">تسجيل الدخول / حساب جديد</span>
+                </a>
+                <a href="contact.html?subject=support" class="menu-item" data-en="Support">
+                    <svg class="menu-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                    <span class="text">الدعم الفني</span>
+                </a>
+                <a href="contact.html" class="menu-item" data-en="Contact Us">
+                    <svg class="menu-icon" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    <span class="text">اتصل بنا</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container" style="padding: 60px 0;">
+        <article class="card"
+            style="max-width: 900px; margin: 0 auto; border: none; box-shadow: none; background: transparent;">
+            <div style="margin-bottom: 32px;">
+                <span class="hero-badge" style="margin-bottom: 16px;">الأدوات</span>
+                <h1 style="font-size: 42px; margin-bottom: 16px;">كيف تبني موقعاً كاملاً باستخدام الذكاء الاصطناعي في
+                    2026؟</h1>
+                <div style="color: var(--color-neutral-600); font-size: 14px;">
+                    <span>📅 20 يناير 2026</span> • <span>⏱️ 5 دقائق قراءة</span>
+                </div>
+            </div>
+
+            <img loading="lazy" src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=400&auto=format&fit=crop&q=60" alt="AI Web Dev"
+                style="width: 100%; border-radius: 20px; margin-bottom: 40px; box-shadow: var(--shadow-lg);">
+
+            <div style="font-size: 18px; line-height: 1.8; color: var(--color-neutral-300);">
+                <p style="margin-bottom: 24px;">لم يعد بناء المواقع حكراً على المبرمجين المحترفين. بفضل أدوات الذكاء
+                    الاصطناعي، يمكنك الآن إنشاء موقع أحلامك في دقائق، سواء كنت تعرف البرمجة أم لا.</p>
+
+                <h2 style="margin-top: 40px; margin-bottom: 20px;">1. التخطيط للموقع (ChatGPT)</h2>
+                <p style="margin-bottom: 24px;">لا تبدأ من الصفر. اطلب من ChatGPT أن يقوم بدور "مدير المشروع".</p>
+                <div
+                    style="background-color: var(--color-primary-lighter); padding: 20px; border-radius: 12px; margin-bottom: 24px;">
+                    <strong>الأمر المقترح:</strong> "أريد إنشاء موقع لمتجر بيع زهور. اعطني هيكلية كاملة للموقع، نصوص
+                    الصفحات الرئيسية، واقتراحات للألوان."
+                </div>
+
+                <h2 style="margin-top: 40px; margin-bottom: 20px;">2. كتابة الأكواد (GitHub Copilot / Cursor)</h2>
+                <p style="margin-bottom: 24px;">إذا كنت مبرمجاً، فإن أدوات مثل Copilot و Cursor (الذي نستخدمه الآن!)
+                    تكمل لك الكود وتصحح الأخطاء. يمكنك حرفياً كتابة "زر تسجيل دخول أزرق" وسيظهر الكود أمامك.</p>
+
+                <h2 style="margin-top: 40px; margin-bottom: 20px;">3. التصميم والصور (Midjourney)</h2>
+                <p style="margin-bottom: 24px;">لا تستخدم صوراً مكررة من الإنترنت. اطلب من Midjourney تصميم "واجهة
+                    مستخدم عصرية لموقع زهور" واستخدمها كإلهام أو كخلفيات.</p>
+
+                <h2 style="margin-top: 40px; margin-bottom: 20px;">4. منصات بناء المواقع بالذكاء الاصطناعي (No-Code)
+                </h2>
+                <p style="margin-bottom: 24px;">إذا لم ترغب في كتابة كود، استخدم أدوات مثل Wix ADI أو Framer AI. فقط
+                    اكتب وصف الموقع، وسيقوم الـ AI ببنائه ونشره لك في ثوانٍ.</p>
+
+                <h2 style="margin-top: 40px; margin-bottom: 20px;">الخاتمة</h2>
+                <p>الذكاء الاصطناعي هو شريكك في البناء. ابدأ بتجربة "مولد الأكواد" في <a href="tools-hub.html"
+                        style="color: var(--color-primary); font-weight: bold;">مركز أدواتنا</a> لتشعر بقوة هذه التقنية
+                    بنفسك.</p>
+            </div>
+        </article>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3 class="logo">
+                        <img src="../images/logo.svg" alt="TechnoMind" style="height: 32px; margin-left: 8px;">
+                        TechnoMind
+                    </h3>
+                    <p data-en="Your trusted guide to the world of AI and Technology. We simplify the complex.">
+                        دليلك الموثوق لعالم الذكاء الاصطناعي والتكنولوجيا. نبسط لك المعقد.
+                    </p>
+                </div>
+
+                <div class="footer-links">
+                    <h4 data-en="Quick Links">روابط سريعة</h4>
+                    <ul>
+                        <li><a href="../index.html" data-en="Home">الرئيسية</a></li>
+                        <li><a href="ai-simplified.html" data-en="AI Simplified">الذكاء الاصطناعي</a></li>
+                        <li><a href="apps-tools.html" data-en="Tools">الأدوات</a></li>
+                        <li><a href="contact.html" data-en="Contact">اتصل بنا</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4 data-en="TechnoMind Project">مشروع TechnoMind</h4>
+                    <ul>
+                        <li><a href="terms.html" data-en="Terms of Service">شروط الاستخدام</a></li>
+                        <li><a href="privacy.html" data-en="Privacy Policy">سياسة الخصوصية</a></li>
+                        <li>
+                            <div
+                                style="direction: ltr; justify-content: flex-start; display:inline-flex; gap:10px; color:var(--color-neutral-400);">
+                                <a href="javascript:void(0)" aria-label="Twitter" title="Twitter - Coming Soon" onclick="if(typeof showToast==='function'){showToast('قريباً! / Coming Soon!','info')}else{alert('Coming Soon!')}"
+                                    style="text-decoration: none; color: inherit; transition: color 0.2s;"
+                                    onmouseover="this.style.color='#38BDF8'" onmouseout="this.style.color='inherit'">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l11.733 16h4.267l-11.733 -16h-4.267z"></path><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"></path></svg>
+                                </a>
+                                <a href="javascript:void(0)" aria-label="LinkedIn" title="LinkedIn - Coming Soon" onclick="if(typeof showToast==='function'){showToast('قريباً! / Coming Soon!','info')}else{alert('Coming Soon!')}"
+                                    style="text-decoration: none; color: inherit; transition: color 0.2s;"
+                                    onmouseover="this.style.color='#0A66C2'" onmouseout="this.style.color='inherit'">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                                </a>
+                                <a href="javascript:void(0)" aria-label="Instagram" title="Instagram - Coming Soon" onclick="if(typeof showToast==='function'){showToast('قريباً! / Coming Soon!','info')}else{alert('Coming Soon!')}"
+                                    style="text-decoration: none; color: inherit; transition: color 0.2s;"
+                                    onmouseover="this.style.color='#E1306C'" onmouseout="this.style.color='inherit'">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 TechnoMind. <span data-en="All rights reserved.">جميع الحقوق محفوظة.</span></p>
+            </div>
+        </div>
+    </footer>
+    <script src="../js/main.js"></script>
+    <script src="../js/enhancements.js"></script>
+    <script src="../js/lang.js"></script>
+</body>
+
+</html>

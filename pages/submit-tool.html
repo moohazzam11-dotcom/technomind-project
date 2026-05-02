@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit a Tool - TechnoMind</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/enhancements.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <script src="../js/lang.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/main.js"></script>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../images/logo.svg">
+    <link rel="apple-touch-icon" href="../images/logo.png">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <a href="../index.html" class="logo"><img src="../images/logo.svg" style="height:40px; margin-left:8px;">
+                TechnoMind</a>
+            <nav class="nav-links">
+                <a href="../index.html">الرئيسية</a>
+                <a href="tools-directory.html">أدوات الذكاء الاصطناعي</a>
+                <a href="ai-simplified.html">الذكاء الاصطناعي ببساطة</a>
+                <a href="make-money.html">استثمر في الذكاء الاصطناعي</a>
+                <button id="langBtn" class="lang-btn">English</button>
+            </nav>
+            <div class="header-actions">
+                <button class="icon-btn" onclick="toggleTheme()" id="themeBtn" aria-label="Toggle Theme">
+                    <svg class="icon-svg" viewBox="0 0 24 24" id="themeIconSvg">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+                <button class="icon-btn" onclick="toggleMainMenu()" aria-label="Toggle Menu">
+                    <svg class="icon-svg" viewBox="0 0 24 24">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="menu-dropdown" id="mainMenu">
+                <div class="menu-section-label">التنقل / Navigation</div>
+                <a href="../index.html" class="menu-item" data-en="Home">
+                    <svg class="menu-icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                    <span class="text">الرئيسية</span>
+                </a>
+                <a href="ai-simplified.html" class="menu-item" data-en="AI Simplified">
+                    <svg class="menu-icon" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"></path><path d="M12 8v4l3 3"></path></svg>
+                    <span class="text">الذكاء الاصطناعي</span>
+                </a>
+                <a href="courses.html" class="menu-item" data-en="Courses">
+                    <svg class="menu-icon" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c0 2 4 3 6 3s6-1 6-3v-5"></path></svg>
+                    <span class="text">الدورات التعليمية</span>
+                </a>
+                <a href="tools-directory.html" class="menu-item" data-en="AI Tools">
+                    <svg class="menu-icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+                    <span class="text">أدوات الذكاء الاصطناعي</span>
+                </a>
+                <a href="make-money.html" class="menu-item" data-en="Earn Online" style="color: var(--color-section-earn);">
+                    <svg class="menu-icon" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                    <span class="text">الربح من الإنترنت</span>
+                </a>
+                <div class="menu-divider"></div>
+                <div class="menu-section-label">الحساب / Account</div>
+                <a href="signup.html" class="menu-item" id="menu-login-item" data-en="Login / Register">
+                    <svg class="menu-icon" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    <span class="text">👤 تسجيل الدخول / حساب جديد</span>
+                </a>
+                <a href="contact.html?subject=support" class="menu-item" data-en="Support">
+                    <svg class="menu-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                    <span class="text">الدعم الفني</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <header class="hero-section"
+        style="min-height: 40vh; display: flex; align-items: center; justify-content: center; text-align: center;">
+        <div class="hero-content">
+            <h1 data-en="Submit a Tool">أضف أداة جديدة</h1>
+            <p data-en="Have an AI tool? Share it with our community.">هل قمت بتطوير أداة ذكاء اصطناعي؟ شاركها مع
+                مجتمعنا.</p>
+        </div>
+    </header>
+
+    <!-- Submit Form Container -->
+    <div class="container"
+        style="max-width: 800px; margin-top: -60px; position: relative; z-index: 2; margin-bottom: 80px;">
+        <div class="card" style="padding: 40px;">
+            <form onsubmit="handleSubmit(event)">
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label style="display: block; color: var(--color-secondary); margin-bottom: 8px;"
+                        data-en="Tool Name">اسم الأداة</label>
+                    <input type="text" required placeholder="e.g. SuperAI"
+                        style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.2); color: white;">
+                </div>
+
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label style="display: block; color: var(--color-secondary); margin-bottom: 8px;"
+                        data-en="Website URL">رابط الموقع</label>
+                    <input type="url" required placeholder="https://example.com"
+                        style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.2); color: white;">
+                </div>
+
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label style="display: block; color: var(--color-secondary); margin-bottom: 8px;"
+                        data-en="Category">التصنيف</label>
+                    <select
+                        style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.2); color: white;">
+                        <option value="coding" data-en="Coding">برمجة</option>
+                        <option value="writing" data-en="Writing">كتابة</option>
+                        <option value="image" data-en="Image Generation">توليد صور</option>
+                        <option value="other" data-en="Other">أخرى</option>
+                    </select>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 30px;">
+                    <label style="display: block; color: var(--color-secondary); margin-bottom: 8px;"
+                        data-en="Description">وصف مختصر</label>
+                    <textarea required rows="4" placeholder="..."
+                        style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.2); color: white;"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%; font-size: 18px;"
+                    data-en="Submit Tool">إرسال الأداة</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p data-en="© 2026 TechnoMind. AI for Everyone.">© 2026 TechnoMind. الذكاء الاصطناعي للجميع.</p>
+        </div>
+    </footer>
+
+    <script>
+        function handleSubmit(e) {
+            e.preventDefault();
+            const isEn = document.documentElement.lang === 'en';
+            // MVP: Just show success message
+            const msg = isEn
+                ? "Thank you! Your tool has been submitted for review."
+                : "شكراً لك! تم إرسال أداتك للمراجعة.";
+
+            if(typeof showToast==='function'){showToast(msg,'info')}else{alert(msg)}
+            e.target.reset(); // Reset form
+        }
+
+        // Apply translations on load if needed
+        document.addEventListener('languageChanged', () => {
+            // Re-render handled by main.js observing data-en? Yes usually.
+            // But for placeholders we might need extra logic if not handled globally.
+        });
+    </script>
+    <script src="../js/enhancements.js"></script>
+</body>
+
+</html>

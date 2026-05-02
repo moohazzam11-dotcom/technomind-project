@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://technomind-project.netlify.app/sitemap.xml

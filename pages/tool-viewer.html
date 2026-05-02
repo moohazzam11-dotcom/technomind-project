@@ -1,0 +1,423 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تفاصيل الأداة - TechnoMind عربي</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/enhancements.css">
+    <script src="../js/auth.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/data/articles.js"></script> <!-- Load Data -->
+    <script src="../js/db.js"></script>
+    <script src="../js/tools.js"></script>
+    <script src="../js/lang.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../images/logo.svg">
+    <link rel="apple-touch-icon" href="../images/logo.png">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <a href="../index.html" class="logo">
+                <img src="../images/logo.svg" alt="TechnoMind" style="height: 40px; margin-left: 8px;"> TechnoMind
+            </a>
+            <nav class="nav-links">
+                <a href="../index.html" data-en="Home">الرئيسية</a>
+                <a href="ai-simplified.html" data-en="AI Simplified">الذكاء الاصطناعي</a>
+                <a href="courses.html" data-en="Courses">الدورات</a>
+                <a href="apps-tools.html" data-en="Tools">الأدوات</a>
+                <a href="tools-hub.html" data-en="Tools Hub">مركز الأدوات</a>
+                <a href="contact.html" data-en="Contact">اتصل بنا</a>
+            </nav>
+
+            <div class="header-actions">
+                <!-- Language Toggle -->
+                <button class="icon-btn" onclick="toggleLanguage()" id="langBtn" title="Switch Language">
+                    <svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20"></path><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                    <span style="font-size: 14px; margin-right: 4px;">EN</span>
+                </button>
+
+                <!-- Theme Toggle -->
+                <button class="icon-btn" onclick="toggleTheme()" id="themeBtn" title="Toggle Theme"
+                    aria-label="Toggle Theme">
+                    <!-- Sun Icon (for dark mode by default) -->
+                    <svg class="icon-svg" viewBox="0 0 24 24" id="themeIconSvg">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+
+                <!-- Search Icon -->
+                <button class="icon-btn" aria-label="Search" onclick="toggleSearch()">
+                    <svg class="icon-svg" viewBox="0 0 24 24">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
+
+                <!-- Hamburger Menu -->
+                <button class="icon-btn" onclick="toggleMainMenu()" aria-label="Toggle Menu">
+                    <svg class="icon-svg" viewBox="0 0 24 24">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+
+
+            <div class="menu-dropdown" id="mainMenu">
+                <!-- Main Navigation Links -->
+                <div class="menu-section-label">Ø§Ù„ØªÙ†Ù‚Ù„ / Navigation</div>
+                <a href="../index.html" class="menu-item" data-en="Home">
+                    <svg class="menu-icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                    <span class="text">Ø§Ù„Ø±Ø¦ÙŠØ³ÙŠØ©</span>
+                </a>
+                <a href="ai-simplified.html" class="menu-item" data-en="AI Simplified">
+                    <svg class="menu-icon" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"></path><path d="M12 8v4l3 3"></path></svg>
+                    <span class="text">Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ</span>
+                </a>
+                <a href="courses.html" class="menu-item" data-en="Courses">
+                    <svg class="menu-icon" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c0 2 4 3 6 3s6-1 6-3v-5"></path></svg>
+                    <span class="text">Ø§Ù„Ø¯ÙˆØ±Ø§Øª Ø§Ù„ØªØ¹Ù„ÙŠÙ…ÙŠØ©</span>
+                </a>
+                <a href="tools-directory.html" class="menu-item" data-en="AI Tools">
+                    <svg class="menu-icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+                    <span class="text">Ø£Ø¯ÙˆØ§Øª Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ</span>
+                </a>
+                <a href="make-money.html" class="menu-item" data-en="Earn Online" style="color: var(--color-section-earn);">
+                    <svg class="menu-icon" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                    <span class="text">Ø§Ù„Ø±Ø¨Ø­ Ù…Ù† Ø§Ù„Ø¥Ù†ØªØ±Ù†Øª</span>
+                </a>
+                <!-- Divider -->
+                <div class="menu-divider"></div>
+                <div class="menu-section-label">Ø§Ù„Ø­Ø³Ø§Ø¨ / Account</div>
+                <a href="signup.html" class="menu-item" id="menu-login-item" data-en="Login / Sign Up">
+                    <svg class="menu-icon" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    <span class="text">تسجيل الدخول / حساب جديد</span>
+                </a>
+                <a href="contact.html?subject=support" class="menu-item" data-en="Support">
+                    <svg class="menu-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                    <span class="text">الدعم الفني</span>
+                </a>
+                <a href="contact.html" class="menu-item" data-en="Contact Us">
+                    <svg class="menu-icon" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    <span class="text">اتصل بنا</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container" style="padding: 60px 0;">
+        <div id="articleContainer" class="card" style="max-width: 800px; margin: 0 auto; min-height: 400px;">
+            <div id="loading" style="text-align: center; color: #666;">جاري تحميل الأداة...</div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3 class="logo">
+                        <img src="../images/logo.svg" alt="TechnoMind" style="height: 32px; margin-left: 8px;">
+                        TechnoMind
+                    </h3>
+                    <p data-en="Your trusted guide to the world of AI and Technology. We simplify the complex.">
+                        دليلك الموثوق لعالم الذكاء الاصطناعي والتكنولوجيا. نبسط لك المعقد.
+                    </p>
+                </div>
+
+                <div class="footer-links">
+                    <h4 data-en="Quick Links">روابط سريعة</h4>
+                    <ul>
+                        <li><a href="../index.html" data-en="Home">الرئيسية</a></li>
+                        <li><a href="ai-simplified.html" data-en="AI Simplified">الذكاء الاصطناعي</a></li>
+                        <li><a href="apps-tools.html" data-en="Tools">الأدوات</a></li>
+                        <li><a href="contact.html" data-en="Contact">اتصل بنا</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4 data-en="TechnoMind Project">مشروع TechnoMind</h4>
+                    <ul>
+                        <li><a href="terms.html" data-en="Terms of Service">شروط الاستخدام</a></li>
+                        <li><a href="privacy.html" data-en="Privacy Policy">سياسة الخصوصية</a></li>
+                        <li>
+                            <div
+                                style="direction: ltr; justify-content: flex-start; display:inline-flex; gap:10px; color:var(--color-neutral-400);">
+                                <a href="javascript:void(0)" aria-label="Twitter" title="Twitter - Coming Soon"
+                                    onclick="if(typeof showToast==='function'){showToast('قريباً! / Coming Soon!','info')}else{alert('Coming Soon!')}"
+                                    style="text-decoration: none; color: inherit; transition: color 0.2s;"
+                                    onmouseover="this.style.color='#38BDF8'" onmouseout="this.style.color='inherit'">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l11.733 16h4.267l-11.733 -16h-4.267z"></path><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"></path></svg>
+                                </a>
+                                <a href="javascript:void(0)" aria-label="LinkedIn" title="LinkedIn - Coming Soon"
+                                    onclick="if(typeof showToast==='function'){showToast('قريباً! / Coming Soon!','info')}else{alert('Coming Soon!')}"
+                                    style="text-decoration: none; color: inherit; transition: color 0.2s;"
+                                    onmouseover="this.style.color='#0A66C2'" onmouseout="this.style.color='inherit'">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                                </a>
+                                <a href="javascript:void(0)" aria-label="Instagram" title="Instagram - Coming Soon"
+                                    onclick="if(typeof showToast==='function'){showToast('قريباً! / Coming Soon!','info')}else{alert('Coming Soon!')}"
+                                    style="text-decoration: none; color: inherit; transition: color 0.2s;"
+                                    onmouseover="this.style.color='#E1306C'" onmouseout="this.style.color='inherit'">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 TechnoMind. <span data-en="All rights reserved.">جميع الحقوق محفوظة.</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const id = parseInt(params.get('id'));
+            const container = document.getElementById('articleContainer');
+
+            if (!window.technoMindTools) {
+                container.innerHTML = '<p style="color:red; text-align:center;">Failed to load database. / فشل تحميل قاعدة البيانات.</p>';
+                return;
+            }
+
+            const tool = window.technoMindTools.find(t => t.id === id);
+
+            if (tool) {
+                renderTool(tool);
+                window.addEventListener('languageChanged', () => renderTool(tool));
+            } else {
+                renderNotFound();
+                window.addEventListener('languageChanged', renderNotFound);
+            }
+
+            function renderNotFound() {
+                const isEn = document.documentElement.getAttribute('lang') === 'en';
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 40px;">
+                        <h2 style="color: white;">${isEn ? '❌ Tool Not Found' : '❌ الأداة غير موجودة'}</h2>
+                        <p style="color: var(--color-neutral-400);">${isEn ? 'Sorry, we could not find the requested tool.' : 'عذراً، لم نتمكن من العثور على الأداة المطلوبة.'}</p>
+                        <a href="tools-directory.html" class="btn btn-primary" style="margin-top: 20px;">${isEn ? 'Back to Directory' : 'العودة لدليل الأدوات'}</a>
+                    </div>
+                `;
+            }
+
+            function renderTool(tool) {
+                const isEn = document.documentElement.getAttribute('lang') === 'en';
+                const title = isEn ? (tool.title_en || tool.title) : tool.title;
+                const category = isEn ? (tool.category_en || tool.category) : tool.category;
+                const content = isEn ? (tool.content_en || tool.content) : tool.content;
+                const backText = isEn ? "← Back to Directory" : "← العودة للدليل";
+                const tryText = isEn ? "🚀 Try Tool (Official Site)" : "🚀 تجربة الأداة (الموقع الرسمي)";
+                const demoTitle = isEn ? "Interactive Demo" : "تجربة تفاعلية (Demo)";
+
+                document.title = `${title} - TechnoMind ${isEn ? '' : 'عربي'}`;
+
+                let toolInterfaceHTML = '';
+                if (tool.tool_type) {
+                    toolInterfaceHTML = `
+                        <div style="margin-top: 40px; border: 1px solid rgba(56, 189, 248, 0.2); background: rgba(56, 189, 248, 0.05); border-radius: 16px; padding: 24px;">
+                            <h3 style="color: var(--color-primary); margin-bottom: 20px;">${demoTitle}</h3>
+                            ${getToolTemplate(tool.tool_type, isEn)}
+                        </div>
+                    `;
+                }
+
+                container.innerHTML = `
+                    <div style="margin-bottom: 24px;">
+                        <span class="hero-badge">${category}</span>
+                        <h1 style="font-size: 36px; margin: 16px 0; color: white;">${tool.icon} ${title}</h1>
+                        <div style="color: var(--color-neutral-400); font-size: 14px;">📅 ${tool.date}</div>
+                    </div>
+                    <div style="font-size: 18px; line-height: 1.8; color: var(--color-neutral-600);">
+                        ${content}
+                    </div>
+                    
+                    ${toolInterfaceHTML}
+
+                    <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; gap: 16px; flex-wrap: wrap;">
+                        <a href="tools-directory.html" class="btn btn-secondary">${backText}</a>
+                        ${tool.external_url ? `<a href="${tool.external_url}" target="_blank" class="btn btn-primary">${tryText}</a>` : ''}
+                    </div>
+
+                    <!-- Reviews Section -->
+                    <div style="margin-top: 60px;">
+                        <h2 style="color: white; font-size: 24px; margin-bottom: 24px;">${isEn ? "User Reviews" : "مراجعات المستخدمين"}</h2>
+                        
+                        <!-- Review Form -->
+                        <div class="review-form" style="background: rgba(255,255,255,0.05); padding: 24px; border-radius: 12px; margin-bottom: 32px;">
+                            <h3 style="margin-top: 0; font-size: 18px; color: var(--color-secondary);">${isEn ? "Write a Review" : "أضف تقييمك"}</h3>
+                            <div style="display: flex; gap: 16px; margin-bottom: 16px; align-items: center;">
+                                <select id="reviewRating" style="padding: 8px; border-radius: 6px; background: rgba(0,0,0,0.3); color: white; border: 1px solid rgba(255,255,255,0.1);">
+                                    <option value="5">⭐⭐⭐⭐⭐ 5/5</option>
+                                    <option value="4">⭐⭐⭐⭐ 4/5</option>
+                                    <option value="3">⭐⭐⭐ 3/5</option>
+                                    <option value="2">⭐⭐ 2/5</option>
+                                    <option value="1">⭐ 1/5</option>
+                                </select>
+                                <input type="text" id="reviewName" placeholder="${isEn ? "Your Name (Optional)" : "الاسم (اختياري)"}" style="flex: 1; padding: 8px; border-radius: 6px; background: rgba(0,0,0,0.3); color: white; border: 1px solid rgba(255,255,255,0.1);">
+                            </div>
+                            <textarea id="reviewText" placeholder="${isEn ? "Share your experience with this tool..." : "شاركنا تجربتك مع هذه الأداة..."}" style="width: 100%; height: 80px; padding: 12px; border-radius: 6px; background: rgba(0,0,0,0.3); color: white; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 16px;"></textarea>
+                            <button onclick="submitReview(${tool.id})" class="btn btn-primary" style="width: 100%;">${isEn ? "Submit Review" : "نشر التقييم"}</button>
+                        </div>
+
+                        <!-- Reviews List -->
+                        <div id="reviewsList"></div>
+                    </div>
+                `;
+
+                renderReviews(tool.id);
+            }
+
+            // Global Submit Handler
+            window.submitReview = function (toolId) {
+                const rating = document.getElementById('reviewRating').value;
+                const name = document.getElementById('reviewName').value || 'Anonymous';
+                const text = document.getElementById('reviewText').value;
+
+                if (!text.trim()) {
+                    if(typeof showToast==='function'){showToast('Please write a review text.','warning')}else{alert('Please write a review text.')}
+                    return;
+                }
+
+                window.db.addReview(toolId, name, rating, text);
+
+                document.getElementById('reviewText').value = '';
+                document.getElementById('reviewName').value = '';
+
+                renderReviews(toolId);
+            };
+
+            function renderReviews(toolId) {
+                const reviews = window.db.getReviews(toolId);
+                const container = document.getElementById('reviewsList');
+                const isEn = document.documentElement.getAttribute('lang') === 'en';
+
+                if (reviews.length === 0) {
+                    container.innerHTML = `<p style="color: #888; text-align: center;">${isEn ? "No reviews yet. Be the first!" : "لا يوجد تقييمات بعد. كن أول من يقيم!"}</p>`;
+                    return;
+                }
+
+                container.innerHTML = reviews.map(r => `
+                    <div style="background: rgba(255,255,255,0.02); border-bottom: 1px solid rgba(255,255,255,0.05); padding: 16px; margin-bottom: 12px; border-radius: 8px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <strong style="color: white;">${r.username}</strong>
+                            <span style="color: #fbbf24;">${'★'.repeat(Math.round(r.rating))}</span>
+                        </div>
+                        <p style="color: #ccc; font-size: 14px; margin: 0;">${r.text}</p>
+                        <span style="color: #666; font-size: 12px; margin-top: 8px; display: block;">${r.date}</span>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function getToolTemplate(type, isEn) {
+                if (type === 'chat') {
+                    // Chat Instructions
+                    const instrTitle = isEn ? "How to use:" : "كيفية الاستخدام:";
+                    const instrText = isEn
+                        ? "Type your question or request in the box below and press 'Send' to start chatting with the AI."
+                        : "اكتب سؤالك أو طلبك في المربع أدناه واضغط على 'إرسال' لبدء الدردشة مع الذكاء الاصطناعي.";
+
+                    // TechnoBot Template
+                    const ph = isEn ? "Ask me anything..." : "اكتب سؤالك هنا...";
+                    const send = isEn ? "Send" : "إرسال";
+                    return `
+                        <div style="margin-bottom: 20px; background: rgba(0,0,0,0.2); padding: 16px; border-radius: 8px;">
+                            <strong style="color: var(--color-secondary); display: block; margin-bottom: 8px;">${instrTitle}</strong>
+                            <p style="margin: 0; font-size: 14px; color: var(--color-neutral-300);">${instrText}</p>
+                        </div>
+                        <div class="chat-window" id="chatWindow" style="height: 300px; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1);">
+                            <div class="message bot">${isEn ? "Hello! I am an AI assistant simulating this tool. How can I help?" : "مرحباً! أنا مساعد ذكي أحاكي هذه الأداة. كيف يمكنني مساعدتك؟"}</div>
+                        </div>
+                        <div class="chat-input-area">
+                            <input type="text" id="userChatInput" placeholder="${ph}"
+                                style="flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 8px;"
+                                onkeypress="handleChatEnter(event)">
+                            <button onclick="sendMessage()" class="btn btn-secondary" style="padding: 12px 20px;">${send}</button>
+                        </div>
+                    `;
+                }
+                else if (type === 'prompt') {
+                    // Prompt Instructions
+                    const instrTitle = isEn ? "How to use:" : "كيفية الاستخدام:";
+                    const instrText = isEn
+                        ? "Select the AI model, enter your topic, and choose a style. Click 'Generate Prompt' to get a ready-to-use command."
+                        : "اختر نوع الأداة (موديل)، اكتب الموضوع، واختر الأسلوب. اضغط على 'توليد الأمر' للحصول على نص جاهز للاستخدام.";
+
+                    // Prompt Gen Template
+                    return `
+                        <div style="margin-bottom: 20px; background: rgba(0,0,0,0.2); padding: 16px; border-radius: 8px;">
+                            <strong style="color: var(--color-secondary); display: block; margin-bottom: 8px;">${instrTitle}</strong>
+                            <p style="margin: 0; font-size: 14px; color: var(--color-neutral-300);">${instrText}</p>
+                        </div>
+                        <div class="form-group">
+                            <label>${isEn ? "Tool Type" : "نوع الأداة"}</label>
+                            <select id="toolType"><option value="midjourney">Midjourney</option><option value="chatgpt">ChatGPT</option></select>
+                        </div>
+                        <div class="form-group">
+                            <label>${isEn ? "Topic" : "الموضوع"}</label>
+                            <input type="text" id="topicInput" placeholder="${isEn ? "e.g. Astronaut Cat" : "مثال: قطة رائد فضاء"}">
+                        </div>
+                        <div class="form-group">
+                            <label>${isEn ? "Style" : "الأسلوب"}</label>
+                            <select id="styleInput">
+                                <option value="professional">${isEn ? "Professional" : "احترافي"}</option>
+                                <option value="creative">${isEn ? "Creative" : "إبداعي"}</option>
+                            </select>
+                        </div>
+                        <button onclick="generatePrompt()" class="btn btn-primary" style="width: 100%;">${isEn ? "Generate Prompt" : "توليد الأمر"}</button>
+                        <div class="result-box" id="promptResult" style="margin-top: 16px; min-height: 60px;">${isEn ? "Result will appear here..." : "ستظهر النتيجة هنا..."}</div>
+                    `;
+                }
+                else if (type === 'code') {
+                    // Code Instructions
+                    const instrTitle = isEn ? "How to use:" : "كيفية الاستخدام:";
+                    const instrText = isEn
+                        ? "Choose the UI element you need and your preferred color theme. Click 'Generate Code' to instantly create the HTML/CSS."
+                        : "اختر عنصر الواجهة الذي تحتاجه والنمط اللوني المفضل. اضغط على 'توليد الكود' لإنشاء كود HTML/CSS فوراً.";
+
+                    // Code Gen Template
+                    return `
+                        <div style="margin-bottom: 20px; background: rgba(0,0,0,0.2); padding: 16px; border-radius: 8px;">
+                            <strong style="color: var(--color-secondary); display: block; margin-bottom: 8px;">${instrTitle}</strong>
+                            <p style="margin: 0; font-size: 14px; color: var(--color-neutral-300);">${instrText}</p>
+                        </div>
+                        <div class="form-group">
+                            <label>${isEn ? "Element" : "العنصر"}</label>
+                            <select id="codeElementType">
+                                <option value="button">${isEn ? "Button" : "زر"}</option>
+                                <option value="card">${isEn ? "Card" : "بطاقة"}</option>
+                                <option value="login">${isEn ? "Login Form" : "نموذج دخول"}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>${isEn ? "Theme" : "السمة"}</label>
+                            <select id="codeColorTheme">
+                                <option value="blue">${isEn ? "Blue" : "أزرق"}</option>
+                                <option value="dark">${isEn ? "Dark" : "داكن"}</option>
+                            </select>
+                        </div>
+                        <button onclick="generateCode()" class="btn btn-primary" style="width: 100%;">${isEn ? "Generate Code" : "توليد الكود"}</button>
+                        <div class="result-box" id="codeResult" style="margin-top: 16px; min-height: 100px;">${isEn ? "Code will appear here..." : "سيظهر الكود هنا..."}</div>
+                    `;
+                }
+                return '';
+            }
+        });
+    </script>
+    <script src="../js/enhancements.js"></script>
+</body>
+
+</html>

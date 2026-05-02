@@ -1,0 +1,558 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Browser the best AI tools and software. Curated directory of productivity, design, and coding tools.">
+    <title>دليل الأدوات - TechnoMind عربي</title>
+    <!-- New HF Style CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/enhancements.css">
+    <link rel="stylesheet" href="../css/hf-style.css">
+
+    <script src="../js/auth.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/tools.js"></script>
+    <script src="../js/data/articles.js"></script>
+    <script src="../js/data/courses.js"></script>
+    <script src="../js/search-engine.js"></script>
+    <script src="../js/db.js"></script>
+    <script src="../js/lang.js"></script>
+    <style>
+        /* Keep specific styles for search/pagination if not in hf-style */
+
+        .fav-btn {
+            position: absolute;
+            top: 24px;
+            left: 24px;
+            /* RTL placement */
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 20px;
+            transition: all 0.2s;
+            z-index: 10;
+            backdrop-filter: blur(4px);
+        }
+
+        .fav-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: #ef4444;
+            transform: scale(1.05);
+        }
+
+        .fav-btn.favorite-active {
+            color: #ef4444;
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        /* Ensure inputs match HF vibe */
+        .search-box-wrapper {
+            margin: 0 auto;
+            max-width: 600px;
+            position: relative;
+        }
+
+        .search-box-modern {
+            width: 100%;
+            padding: 16px 50px 16px 24px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            font-family: inherit;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .search-box-modern:focus {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--color-primary);
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.1);
+        }
+
+        .search-icon-inside {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.5;
+        }
+
+        /* Pagination overrides to look decent on dark */
+        .page-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin: 0 4px;
+        }
+
+        .page-btn:hover:not(:disabled) {
+            background: var(--color-primary);
+            border-color: var(--color-primary);
+        }
+
+        .page-btn.active {
+            background: var(--color-primary);
+            border-color: var(--color-primary);
+        }
+
+        .page-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../images/logo.svg">
+    <link rel="apple-touch-icon" href="../images/logo.png">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <a href="../index.html" class="logo">
+                <img src="../images/logo.svg" alt="TechnoMind" style="height: 40px; margin-left: 8px;"> TechnoMind
+            </a>
+            <nav class="nav-links">
+                <a href="../index.html" data-en="Home">الرئيسية</a>
+                <a href="ai-simplified.html" data-en="AI Simplified">الذكاء الاصطناعي</a>
+                <a href="courses.html" data-en="Courses">الدورات</a>
+                <a href="apps-tools.html" data-en="Tools">الأدوات</a>
+                <a href="tools-hub.html" data-en="Tools Hub">مركز الأدوات</a>
+                <a href="contact.html" data-en="Contact">اتصل بنا</a>
+            </nav>
+
+            <div class="header-actions">
+                <!-- Language Toggle -->
+                <button class="icon-btn" onclick="toggleLanguage()" id="langBtn" title="Switch Language">
+                    <svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20"></path><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                    <span style="font-size: 14px; margin-right: 4px;">EN</span>
+                </button>
+
+                <!-- Theme Toggle -->
+                <button class="icon-btn" onclick="toggleTheme()" id="themeBtn" title="Toggle Theme"
+                    aria-label="Toggle Theme">
+                    <svg class="icon-svg" viewBox="0 0 24 24" id="themeIconSvg">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+
+                <!-- Search Icon -->
+                <button class="icon-btn" aria-label="Search" onclick="toggleSearch()">
+                    <svg class="icon-svg" viewBox="0 0 24 24">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
+
+                <!-- Hamburger Menu -->
+                <button class="icon-btn" onclick="toggleMainMenu()" aria-label="Toggle Menu">
+                    <svg class="icon-svg" viewBox="0 0 24 24">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="menu-dropdown" id="mainMenu">
+                <!-- Main Navigation Links -->
+                <div class="menu-section-label">Ø§Ù„ØªÙ†Ù‚Ù„ / Navigation</div>
+                <a href="../index.html" class="menu-item" data-en="Home">
+                    <svg class="menu-icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                    <span class="text">Ø§Ù„Ø±Ø¦ÙŠØ³ÙŠØ©</span>
+                </a>
+                <a href="ai-simplified.html" class="menu-item" data-en="AI Simplified">
+                    <svg class="menu-icon" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"></path><path d="M12 8v4l3 3"></path></svg>
+                    <span class="text">Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ</span>
+                </a>
+                <a href="courses.html" class="menu-item" data-en="Courses">
+                    <svg class="menu-icon" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c0 2 4 3 6 3s6-1 6-3v-5"></path></svg>
+                    <span class="text">Ø§Ù„Ø¯ÙˆØ±Ø§Øª Ø§Ù„ØªØ¹Ù„ÙŠÙ…ÙŠØ©</span>
+                </a>
+                <a href="tools-directory.html" class="menu-item" data-en="AI Tools">
+                    <svg class="menu-icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+                    <span class="text">Ø£Ø¯ÙˆØ§Øª Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ</span>
+                </a>
+                <a href="make-money.html" class="menu-item" data-en="Earn Online" style="color: var(--color-section-earn);">
+                    <svg class="menu-icon" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                    <span class="text">Ø§Ù„Ø±Ø¨Ø­ Ù…Ù† Ø§Ù„Ø¥Ù†ØªØ±Ù†Øª</span>
+                </a>
+                <!-- Divider -->
+                <div class="menu-divider"></div>
+                <div class="menu-section-label">Ø§Ù„Ø­Ø³Ø§Ø¨ / Account</div>
+                <a href="signup.html" class="menu-item" id="menu-login-item" data-en="Login / Sign Up">
+                    <svg class="menu-icon" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    <span class="text">تسجيل الدخول / حساب جديد</span>
+                </a>
+                <a href="contact.html?subject=support" class="menu-item" data-en="Support">
+                    <svg class="menu-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                    <span class="text">الدعم الفني</span>
+                </a>
+                <a href="contact.html" class="menu-item" data-en="Contact Us">
+                    <svg class="menu-icon" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    <span class="text">اتصل بنا</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container" style="padding: 60px 0;">
+        <div style="text-align: center; margin-bottom: 60px;">
+            <div style="font-size: 64px; margin-bottom: 16px; animation: float 6s ease-in-out infinite;">🧰</div>
+            <h1 style="font-size: 48px; margin-bottom: 16px; margin-top: 0; color: var(--color-white);">
+                <span data-en="AI Tools Directory">دليل أدوات الذكاء الاصطناعي</span>
+            </h1>
+            <p style="color: var(--color-neutral-400); font-size: 20px; max-width: 600px; margin: 0 auto; margin-bottom: 40px;"
+                data-en="Curated collection of the best AI tools to boost your productivity.">
+                تصفح مجموعة مختارة من أفضل التطبيقات والأدوات التي تساعدك على زيادة الإنتاجية.
+            </p>
+
+            <div class="search-box-wrapper">
+                <input type="text" id="toolSearchInput" placeholder="ابحث عن أداة (مثال: Video, Code)..."
+                    class="search-box-modern" oninput="filterTools(this.value)"
+                    data-en-placeholder="Search tools (e.g. Video, Code)...">
+                <span class="search-icon-inside">🔍</span>
+            </div>
+        </div>
+
+        <!-- HF Grid Layout -->
+        <div id="toolsGrid" class="hf-grid">
+            <!-- Items loaded via JS -->
+        </div>
+
+        <div class="pagination" id="paginationControls">
+            <!-- Buttons loaded via JS -->
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3 class="logo">
+                        <img src="../images/logo.svg" alt="TechnoMind" style="height: 32px; margin-left: 8px;">
+                        TechnoMind
+                    </h3>
+                    <p data-en="Your trusted guide to the world of AI and Technology. We simplify the complex.">
+                        دليلك الموثوق لعالم الذكاء الاصطناعي والتكنولوجيا. نبسط لك المعقد.
+                    </p>
+                </div>
+
+                <div class="footer-links">
+                    <h4 data-en="Quick Links">روابط سريعة</h4>
+                    <ul>
+                        <li><a href="../index.html" data-en="Home">الرئيسية</a></li>
+                        <li><a href="ai-simplified.html" data-en="AI Simplified">الذكاء الاصطناعي</a></li>
+                        <li><a href="courses.html" data-en="Courses">الدورات</a></li>
+                        <li><a href="apps-tools.html" data-en="Tools">الأدوات</a></li>
+                        <li><a href="contact.html" data-en="Contact">اتصل بنا</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4 data-en="TechnoMind Project">مشروع TechnoMind</h4>
+                    <ul>
+                        <li><a href="terms.html" data-en="Terms of Service">شروط الاستخدام</a></li>
+                        <li><a href="privacy.html" data-en="Privacy Policy">سياسة الخصوصية</a></li>
+                        <li>
+                            <div
+                                style="direction: ltr; justify-content: flex-start; display:inline-flex; gap:10px; color:var(--color-neutral-400);">
+                                <a href="javascript:void(0)" aria-label="Twitter" title="Twitter - Coming Soon"
+                                    onclick="if(typeof showToast==='function'){showToast('قريباً! / Coming Soon!','info')}else{alert('Coming Soon!')}"
+                                    style="text-decoration: none; color: inherit; transition: color 0.2s;"
+                                    onmouseover="this.style.color='#38BDF8'" onmouseout="this.style.color='inherit'">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l11.733 16h4.267l-11.733 -16h-4.267z"></path><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"></path></svg>
+                                </a>
+                                <a href="javascript:void(0)" aria-label="LinkedIn" title="LinkedIn - Coming Soon"
+                                    onclick="if(typeof showToast==='function'){showToast('قريباً! / Coming Soon!','info')}else{alert('Coming Soon!')}"
+                                    style="text-decoration: none; color: inherit; transition: color 0.2s;"
+                                    onmouseover="this.style.color='#0A66C2'" onmouseout="this.style.color='inherit'">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                                </a>
+                                <a href="javascript:void(0)" aria-label="Instagram" title="Instagram - Coming Soon"
+                                    onclick="if(typeof showToast==='function'){showToast('قريباً! / Coming Soon!','info')}else{alert('Coming Soon!')}"
+                                    style="text-decoration: none; color: inherit; transition: color 0.2s;"
+                                    onmouseover="this.style.color='#E1306C'" onmouseout="this.style.color='inherit'">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 TechnoMind. <span data-en="All rights reserved.">جميع الحقوق محفوظة.</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const ITEMS_PER_PAGE = 8;
+        let currentPage = 1;
+        let allTools = [];
+        let displayedTools = [];
+        let isSearchMode = false;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.technoMindTools) {
+                allTools = window.technoMindTools;
+                displayedTools = allTools;
+
+                const urlParams = new URLSearchParams(window.location.search);
+                const search = urlParams.get('search');
+
+                if (search) {
+                    const input = document.getElementById('toolSearchInput');
+                    if (input) input.value = search;
+                    performSearch(search);
+                } else {
+                    renderPage(1);
+                }
+            } else {
+                document.getElementById('toolsGrid').innerHTML = '<p style="text-align:center">فشل تحميل الأدوات.</p>';
+            }
+        });
+
+        function performSearch(query) {
+            if (!query || !query.trim()) {
+                isSearchMode = false;
+                displayedTools = allTools;
+                renderPage(1);
+                return;
+            }
+
+            isSearchMode = true;
+            const results = window.TechnoMindSearch.performGlobalSearch(query);
+            renderSearchResults(results, query);
+        }
+
+        function renderSearchResults(results, query) {
+            const grid = document.getElementById('toolsGrid');
+            const isEn = document.documentElement.getAttribute('lang') === 'en';
+
+            // Clear default grid styling for custom sections
+            grid.className = '';
+            grid.innerHTML = '';
+            document.getElementById('paginationControls').innerHTML = ''; // Hide pagination in search mode
+
+            const hasTools = results.tools.length > 0;
+            const hasCourses = results.courses.length > 0;
+            const hasArticles = results.articles.length > 0;
+
+            if (!hasTools && !hasCourses && !hasArticles) {
+                grid.innerHTML = `<div style="text-align:center; padding: 60px; width: 100%;">
+                    <h3 style="color:white; margin-bottom:16px;">${isEn ? 'No results found' : 'لا توجد نتائج'}</h3>
+                    <p style="color:#aaa;">${isEn ? `We couldn't find anything for "${query}"` : `لم نجد أي نتائج بحث تطابق "${query}"`}</p>
+                </div>`;
+                return;
+            }
+
+            let htmlContent = '';
+
+            // 1. Tools Section
+            if (hasTools) {
+                htmlContent += `
+                    <div style="grid-column: 1/-1; margin: 40px 0 20px;">
+                        <h2 style="color:var(--color-primary); font-size:24px; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:12px;">
+                            ${isEn ? 'Tools' : 'الأدوات'} (${results.tools.length})
+                        </h2>
+                    </div>
+                    <div class="hf-grid">
+                        ${results.tools.map(tool => renderToolCard(tool, isEn)).join('')}
+                    </div>
+                `;
+            }
+
+            // 2. Courses Section
+            if (hasCourses) {
+                htmlContent += `
+                    <div style="grid-column: 1/-1; margin: 60px 0 20px;">
+                        <h2 style="color:var(--color-section-earn); font-size:24px; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:12px;">
+                            ${isEn ? 'Courses' : 'الدورات التعليمية'} (${results.courses.length})
+                        </h2>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; width: 100%;">
+                        ${results.courses.map(course => renderCourseCard(course, isEn)).join('')}
+                    </div>
+                `;
+            }
+
+            // 3. Articles Section
+            if (hasArticles) {
+                htmlContent += `
+                    <div style="grid-column: 1/-1; margin: 60px 0 20px;">
+                        <h2 style="color:var(--color-section-ai); font-size:24px; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:12px;">
+                            ${isEn ? 'Knowledge Base' : 'المقالات والشروحات'} (${results.articles.length})
+                        </h2>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; width: 100%;">
+                        ${results.articles.map(article => renderArticleCard(article, isEn)).join('')}
+                    </div>
+                `;
+            }
+
+            grid.innerHTML = htmlContent;
+        }
+
+        // --- Helper Renderers ---
+
+        function renderToolCard(tool, isEn) {
+            const title = isEn ? (tool.title_en || tool.title) : tool.title;
+            const category = isEn ? (tool.category_en || tool.category) : tool.category;
+            const summary = isEn ? (tool.summary_en || tool.summary) : tool.summary;
+            const link = tool.internal_url ? tool.internal_url : `tool-viewer.html?id=${tool.id}`;
+            const isFav = window.db ? window.db.isFavorite(tool.id) : false;
+            const favClass = isFav ? 'favorite-active' : '';
+
+            return `
+                <div class="hf-card" onclick="window.location.href='${link}'">
+                     <div class="fav-btn ${favClass}" onclick="event.stopPropagation(); toggleFav(event, '${tool.id}')">♥</div>
+                    <div class="hf-card-content">
+                        <span class="hf-card-badge">${category}</span>
+                        <h3>${title}</h3>
+                        <p>${summary}</p>
+                    </div>
+                    <div class="hf-card-illustration">${tool.icon || '🚀'}</div>
+                </div>
+            `;
+        }
+
+        function renderCourseCard(course, isEn) {
+            return `
+                <a href="course-viewer.html?id=${course.id}" class="card" style="display:block; text-decoration:none; border: 1px solid rgba(255,255,255,0.1);">
+                    <div style="height:160px; overflow:hidden; border-radius:8px; margin-bottom:16px;">
+                        <img loading="lazy" src="../${course.thumbnail}" alt="${course.title}" style="width:100%; height:100%; object-fit:cover;">
+                    </div>
+                    <h3 style="color:white; margin-bottom:8px;">${course.title}</h3>
+                    <div style="font-size:14px; color:#aaa;">${course.level ? course.level : 'Course'} • ${course.duration}</div>
+                </a>
+            `;
+        }
+
+        function renderArticleCard(article, isEn) {
+            // Map IDs to specific pages
+            let link = 'ai-simplified.html'; // Default fallback
+
+            if (article.id === 1) link = 'guide-image-prompts.html'; // Midjourney
+            else if (article.id === 2) link = 'article-chatgpt.html'; // ChatGPT
+            else if (article.id === 15) link = 'guide-knowledge-base.html'; // Second Brain
+            else if (article.id === 4) link = 'article-web-dev-ai.html'; // Gemini (Web Dev context) -> actually ID 19 is Web Dev
+            else if (article.id === 5) link = 'article-digital-products.html'; // Claude -> actually ID 17 is Digital Products
+            // New Mappings
+            else if (article.id === 16) link = 'article-earn.html';
+            else if (article.id === 17) link = 'article-digital-products.html';
+            else if (article.id === 18) link = 'article-productivity.html';
+            else if (article.id === 19) link = 'article-web-dev-ai.html';
+            else if (article.id === 20) link = 'article-tools.html';
+
+            return `
+                <a href="${link}" class="card" style="display:block; text-decoration:none; border: 1px solid rgba(255,255,255,0.1);">
+                    <div style="font-size:40px; margin-bottom:16px;">${article.icon || '📄'}</div>
+                    <h3 style="color:white; margin-bottom:8px;">${article.title}</h3>
+                    <p style="font-size:14px; color:#aaa; line-height:1.4;">${article.summary ? article.summary.substring(0, 80) : ''}...</p>
+                </a>
+            `;
+        }
+
+        // --- Standard Pagination (Tools Only) ---
+
+        // Re-render on language change
+        window.addEventListener('languageChanged', () => {
+            if (isSearchMode) {
+                const input = document.getElementById('toolSearchInput');
+                if (input && input.value) performSearch(input.value);
+            } else {
+                renderPage(currentPage);
+            }
+        });
+
+        function renderPage(page) {
+            isSearchMode = false;
+            currentPage = page;
+            const start = (page - 1) * ITEMS_PER_PAGE;
+            const end = start + ITEMS_PER_PAGE;
+            const items = displayedTools.slice(start, end);
+
+            const isEn = document.documentElement.getAttribute('lang') === 'en';
+            const grid = document.getElementById('toolsGrid');
+
+            grid.className = 'hf-grid'; // Restore grid class
+
+            if (items.length === 0 && displayedTools.length === 0) {
+                const msg = isEn ? "No tools available." : "لا توجد أدوات متاحة.";
+                grid.innerHTML = `<p style="grid-column: 1/-1; text-align:center; padding: 40px; color: #666;">${msg}</p>`;
+                document.getElementById('paginationControls').innerHTML = '';
+                return;
+            }
+
+            grid.innerHTML = items.map(tool => renderToolCard(tool, isEn)).join('');
+            renderPagination();
+            window.scrollTo(0, 0);
+        }
+
+        function renderPagination() {
+            const totalPages = Math.ceil(displayedTools.length / ITEMS_PER_PAGE);
+            const container = document.getElementById('paginationControls');
+            const isEn = document.documentElement.getAttribute('lang') === 'en';
+
+            if (totalPages <= 1) {
+                container.innerHTML = '';
+                return;
+            }
+
+            let html = `
+                <button class="page-btn" onclick="renderPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>${isEn ? 'Previous' : 'السابق'}</button>
+            `;
+
+            for (let i = 1; i <= totalPages; i++) {
+                html += `
+                    <button class="page-btn ${currentPage === i ? 'active' : ''}" onclick="renderPage(${i})">${i}</button>
+                `;
+            }
+
+            html += `
+                <button class="page-btn" onclick="renderPage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>${isEn ? 'Next' : 'التالي'}</button>
+            `;
+
+            container.innerHTML = html;
+        }
+
+        function toggleFav(e, id) {
+            e.preventDefault();
+            const isFav = window.db.toggleFavorite(id);
+            const btn = e.currentTarget;
+            if (isFav) {
+                btn.classList.add('favorite-active');
+            } else {
+                btn.classList.remove('favorite-active');
+            }
+        }
+    </script>
+    <script src="../js/enhancements.js"></script>
+</body>
+
+</html>

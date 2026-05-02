@@ -1,0 +1,27 @@
+# ---------------------------------------------------------------------------
+# Netlify configuration for TechnoMind
+# https://docs.netlify.com/configure-builds/file-based-configuration/
+# ---------------------------------------------------------------------------
+
+[build]
+  publish = "."
+
+# Serve .html files when the URL is requested without the extension
+# e.g. /pages/ai-simplified → /pages/ai-simplified.html
+[build.processing.html]
+  pretty_urls = true
+
+# Security headers applied to every response
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+# Catch-all: serve 404.html for any URL that doesn't match a real file
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404

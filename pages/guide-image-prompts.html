@@ -1,0 +1,655 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مكتبة أوامر التصميم (Image Prompts) - TechnoMind عربي</title>
+    <meta name="description"
+        content="أفضل الأوامر (Prompts) لإنشاء صور احترافية باستخدام Midjourney و DALL-E. إضاءة، زوايا تصوير، ستايلات فنية، والمزيد.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/enhancements.css">
+    <script src="../js/auth.js"></script>
+    <script src="../js/lang.js"></script>
+
+    <style>
+        .prompt-section {
+            margin-bottom: 60px;
+        }
+
+        .prompt-section h2 {
+            color: white;
+            font-size: 28px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 12px;
+        }
+
+        .prompt-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .prompt-card {
+            background: rgba(20, 20, 20, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .prompt-card:hover {
+            border-color: var(--color-primary);
+            transform: translateY(-2px);
+        }
+
+        .prompt-title {
+            color: var(--color-primary-light);
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .prompt-text {
+            background: #000;
+            color: #10b981;
+            /* Terminal Green */
+            font-family: monospace;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-top: 12px;
+            border: 1px solid #333;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .prompt-text:hover {
+            background: #111;
+        }
+
+        .copy-hint {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            /* RTL flip check needed? No, code is LTR usually */
+            font-size: 10px;
+            color: #666;
+            background: #222;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.05);
+            color: #aaa;
+            font-size: 12px;
+            padding: 4px 8px;
+            border-radius: 20px;
+        }
+    </style>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../images/logo.svg">
+    <link rel="apple-touch-icon" href="../images/logo.png">
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <a href="../index.html" class="logo">
+                <img src="../images/logo.svg" alt="TechnoMind" style="height: 40px; margin-left: 8px;"> TechnoMind
+            </a>
+            <nav class="nav-links">
+                <a href="../index.html" data-en="Home">الرئيسية</a>
+                <a href="ai-simplified.html" data-en="AI Simplified">الذكاء الاصطناعي</a>
+                <a href="courses.html" data-en="Courses">الدورات</a>
+                <a href="apps-tools.html" data-en="Tools">الأدوات</a>
+                <a href="tools-hub.html" data-en="Tools Hub">مركز الأدوات</a>
+                <a href="contact.html" data-en="Contact">اتصل بنا</a>
+            </nav>
+
+            <div class="header-actions">
+                <!-- Language Toggle -->
+                <button class="icon-btn" onclick="toggleLanguage()" id="langBtn" title="Switch Language">
+                    <svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20"></path><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                    <span style="font-size: 14px; margin-right: 4px;">EN</span>
+                </button>
+
+                <!-- Theme Toggle -->
+                <button class="icon-btn" onclick="toggleTheme()" id="themeBtn" title="Toggle Theme"
+                    aria-label="Toggle Theme">
+                    <!-- Sun Icon (for dark mode by default) -->
+                    <svg class="icon-svg" viewBox="0 0 24 24" id="themeIconSvg">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+
+                <!-- Search Icon -->
+                <button class="icon-btn" aria-label="Search" onclick="toggleSearch()">
+                    <svg class="icon-svg" viewBox="0 0 24 24">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
+
+                <!-- Hamburger Menu -->
+                <button class="icon-btn" onclick="toggleMainMenu()" aria-label="Toggle Menu">
+                    <svg class="icon-svg" viewBox="0 0 24 24">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+
+            <div class="menu-dropdown" id="mainMenu">
+                <!-- Main Navigation Links -->
+                <div class="menu-section-label">Ø§Ù„ØªÙ†Ù‚Ù„ / Navigation</div>
+                <a href="../index.html" class="menu-item" data-en="Home">
+                    <svg class="menu-icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                    <span class="text">Ø§Ù„Ø±Ø¦ÙŠØ³ÙŠØ©</span>
+                </a>
+                <a href="ai-simplified.html" class="menu-item" data-en="AI Simplified">
+                    <svg class="menu-icon" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"></path><path d="M12 8v4l3 3"></path></svg>
+                    <span class="text">Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ</span>
+                </a>
+                <a href="courses.html" class="menu-item" data-en="Courses">
+                    <svg class="menu-icon" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c0 2 4 3 6 3s6-1 6-3v-5"></path></svg>
+                    <span class="text">Ø§Ù„Ø¯ÙˆØ±Ø§Øª Ø§Ù„ØªØ¹Ù„ÙŠÙ…ÙŠØ©</span>
+                </a>
+                <a href="tools-directory.html" class="menu-item" data-en="AI Tools">
+                    <svg class="menu-icon" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+                    <span class="text">Ø£Ø¯ÙˆØ§Øª Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ</span>
+                </a>
+                <a href="make-money.html" class="menu-item" data-en="Earn Online" style="color: var(--color-section-earn);">
+                    <svg class="menu-icon" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                    <span class="text">Ø§Ù„Ø±Ø¨Ø­ Ù…Ù† Ø§Ù„Ø¥Ù†ØªØ±Ù†Øª</span>
+                </a>
+                <!-- Divider -->
+                <div class="menu-divider"></div>
+                <div class="menu-section-label">Ø§Ù„Ø­Ø³Ø§Ø¨ / Account</div>
+                <a href="signup.html" class="menu-item" id="menu-login-item" data-en="Login / Sign Up">
+                    <svg class="menu-icon" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    <span class="text">تسجيل الدخول / حساب جديد</span>
+                </a>
+                <a href="contact.html?subject=support" class="menu-item" data-en="Support">
+                    <svg class="menu-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                    <span class="text">الدعم الفني</span>
+                </a>
+                <a href="contact.html" class="menu-item" data-en="Contact Us">
+                    <svg class="menu-icon" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    <span class="text">اتصل بنا</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Content -->
+    <div class="container" style="padding: 100px 0 60px 0;">
+        <span style="color: var(--color-accent-pink); font-weight: 600; font-size: 16px;">🎨 مكتبة الإبداع</span>
+        <h1 style="font-size: 42px; margin-top: 16px; margin-bottom: 24px; color: white;">أفضل أوامر (Prompts) لتوليد
+            الصور والتحرير</h1>
+
+        <!-- Video Tutorial Section -->
+        <!-- Video Tutorial Section -->
+        <a href="https://www.youtube.com/watch?v=S7xTBa93TX8" target="_blank" class="video-link-card">
+            <img loading="lazy" src="https://img.youtube.com/vi/S7xTBa93TX8/maxresdefault.jpg" alt="Video Tutorial">
+            <div class="video-play-button"></div>
+        </a>
+
+        <p style="color: var(--color-neutral-400); max-width: 700px; font-size: 18px;">
+            مجموعة مختارة من المصطلحات والكلمات المفتاحية لتحصل على نتائج مذهلة من Midjourney و DALL-E. اضغط على أي كود
+            لنسخه.
+        </p>
+    </div>
+
+    <div class="container">
+
+        <!-- Section: Photography Styles -->
+        <div class="prompt-section">
+            <h2>📸 زوايا وإعدادات التصوير (Photography)</h2>
+            <div class="prompt-grid">
+                <div class="prompt-card">
+                    <div class="prompt-title">واقعية سينمائية</div>
+                    <p style="color:#ccc; font-size:14px;">لصور تبدو وكأنها من فيلم عالي الجودة.</p>
+                    <div class="prompt-text" onclick="copyPrompt(this)">
+                        cinematic shot, 8k resolution, ultra realistic, highly detailed, depth of field, shot on IMAX
+                        <span class="copy-hint">نسخ</span>
+                    </div>
+                </div>
+                <div class="prompt-card">
+                    <div class="prompt-title">تصوير ماكرو (Macro)</div>
+                    <p style="color:#ccc; font-size:14px;">لتصوير التفاصيل الدقيقة جداً (حشرات، قطرات، عيون).</p>
+                    <div class="prompt-text" onclick="copyPrompt(this)">
+                        macro photography, extreme close-up, intricate details, sharp focus, 100mm lens
+                        <span class="copy-hint">نسخ</span>
+                    </div>
+                </div>
+                <div class="prompt-card">
+                    <div class="prompt-title">زاية واسعة (Wide Angle)</div>
+                    <p style="color:#ccc; font-size:14px;">للمناظر الطبيعية والمدن.</p>
+                    <div class="prompt-text" onclick="copyPrompt(this)">
+                        wide angle shot, panoramic view, GoPro style, fish-eye lens, massive scale
+                        <span class="copy-hint">نسخ</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section: Lighting -->
+        <div class="prompt-section">
+            <h2>💡 الإضاءة (Lighting)</h2>
+            <div class="prompt-grid">
+                <div class="prompt-card">
+                    <div class="prompt-title">الساعة الذهبية (Golden Hour)</div>
+                    <p style="color:#ccc; font-size:14px;">إضاءة دافئة وناعمة وقت الغروب.</p>
+                    <div class="prompt-text" onclick="copyPrompt(this)">
+                        golden hour lighting, warm atmosphere, sun flare, soft shadows, dreamy glow
+                        <span class="copy-hint">نسخ</span>
+                    </div>
+                </div>
+                <div class="prompt-card">
+                    <div class="prompt-title">إضاءة نيون (Cyberpunk)</div>
+                    <p style="color:#ccc; font-size:14px;">لصور مستقبلية وحضرية.</p>
+                    <div class="prompt-text" onclick="copyPrompt(this)">
+                        neon lighting, cyberpunk styles, cyan and magenta lights, dark atmosphere, futuristic city
+                        lights
+                        <span class="copy-hint">نسخ</span>
+                    </div>
+                </div>
+                <div class="prompt-card">
+                    <div class="prompt-title">إضاءة درامية (Volumetric)</div>
+                    <p style="color:#ccc; font-size:14px;">أشعة ضوء تخترق الدخان أو الغبار.</p>
+                    <div class="prompt-text" onclick="copyPrompt(this)">
+                        volumetric lighting, god rays, dramatic shadows, moody atmosphere, cinematic lighting
+                        <span class="copy-hint">نسخ</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section: Editing Tasks -->
+        <div class="prompt-section">
+            <h2>🛠️ أوامر التعديل (Inpainting / Editing)</h2>
+            <div class="prompt-grid">
+                <div class="prompt-card">
+                    <div class="prompt-title">تغيير الملابس</div>
+                    <p style="color:#ccc; font-size:14px;">عند تحديد الملابس وطلب تغييرها.</p>
+                    <div class="prompt-text" onclick="copyPrompt(this)">
+                        wearing a professional black business suit, white shirt, red tie, high quality fabric
+                        <span class="copy-hint">نسخ</span>
+                    </div>
+                </div>
+                <div class="prompt-card">
+                    <div class="prompt-title">إزالة الخلفية / عزل</div>
+                    <p style="color:#ccc; font-size:14px;">لجعل الشخصية في استوديو نظيف.</p>
+                    <div class="prompt-text" onclick="copyPrompt(this)">
+                        isolated on plain white background, studio lighting, clean edges, no background
+                        <span class="copy-hint">نسخ</span>
+                    </div>
+                </div>
+                <div class="prompt-card">
+                    <div class="prompt-title">تحويل لكرتون</div>
+                    <p style="color:#ccc; font-size:14px;">(Image to Image) تحويل صورة حقيقية لكرتون.</p>
+                    <div class="prompt-text" onclick="copyPrompt(this)">
+                        pixar style 3d character, cute, vibrant colors, soft rendering, animation style
+                        <span class="copy-hint">نسخ</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section: Trending on Social Media -->
+        <div class="prompt-section">
+            <h2 style="color: var(--color-accent-gold); border-color: rgba(251, 191, 36, 0.2);">🔥 تريندات السوشيال
+                ميديا (Viral Trends)</h2>
+            <div class="prompt-grid">
+                <div class="prompt-card">
+                    <div class="prompt-title">ستايل ديزني / بيكسار</div>
+                    <p style="color:#ccc; font-size:14px;">حول صورتك لشخصية كرتونية لطيفة (3D/Animation).</p>
+                    <div class="prompt-text" onclick="copyPrompt(this)">
+                        pixar style 3d character, cute, big eyes, disney animation style, soft lighting, 8k render,
+                        highly detailed
+                        <span class="copy-hint">نسخ</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">#Trend</span>
+                        <span class="tag">#Cute</span>
+                    </div>
+                </div>
+                <div class="prompt-card">
+                    <div class="prompt-title">صورة "لينكد إن" الاحترافية</div>
+                    <p style="color:#ccc; font-size:14px;">للحصول على صورة شخصية رسمية وبدلة (Headshot).</p>
+                    <div class="prompt-text" onclick="copyPrompt(this)">
+                        professional linkedin headshot, business suit, confidence, studio lighting, bokeh office
+                        background, 8k, sharp focus
+                        <span class="copy-hint">نسخ</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">#Business</span>
+                        <span class="tag">#Job</span>
+                    </div>
+                </div>
+                <div class="prompt-card">
+                    <div class="prompt-title">ستايل "GTA" (ألعاب الفيديو)</div>
+                    <p style="color:#ccc; font-size:14px;">بوستر لعبة GTA الشهير، رسم فيكتور كونتراست عالي.</p>
+                    <div class="prompt-text" onclick="copyPrompt(this)">
+                        grand theft auto loading screen style, gta v art style, vector art, high contrast, comic book
+                        shading, bold lines
+                        <span class="copy-hint">نسخ</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">#Gaming</span>
+                        <span class="tag">#Art</span>
+                    </div>
+                </div>
+                <div class="prompt-card">
+                    <div class="prompt-title">ستايل صور التسعينات (Yearbook)</div>
+                    <p style="color:#ccc; font-size:14px;">فلتر الصور القديمة المدرسية (AI Yearbook Trend).</p>
+                    <div class="prompt-text" onclick="copyPrompt(this)">
+                        1990s yearbook photo style, retro aesthetics, vintage film grain, high school portrait, blue
+                        backdrop, soft focus
+                        <span class="copy-hint">نسخ</span>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">#Retro</span>
+                        <span class="tag">#90s</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section: Art Styles -->
+        <div class="prompt-section">
+            <h2>🎨 أنماط فنية (Art Styles)</h2>
+            <div class="prompt-grid">
+                <div class="prompt-card">
+                    <div class="prompt-title">رسم زيتي (Oil Painting)</div>
+                    <p style="color:#ccc; font-size:14px;">لمسات فرشاة بارزة وكلاسيكية.</p>
+                    <div class="prompt-text" onclick="copyPrompt(this)">
+                        oil painting style, thick brushstrokes, textured canvas, classical art, impasto technique
+                        <span class="copy-hint">نسخ</span>
+                    </div>
+                </div>
+                <div class="prompt-card">
+                    <div class="prompt-title">ألوان مائية (Watercolor)</div>
+                    <p style="color:#ccc; font-size:14px;">ناعم، انسيابي، وشفاف.</p>
+                    <div class="prompt-text" onclick="copyPrompt(this)">
+                        watercolor painting, soft pastel colors, wet on wet, flowing shapes, dreamy atmosphere
+                        <span class="copy-hint">نسخ</span>
+                    </div>
+                </div>
+                <div class="prompt-card">
+                    <div class="prompt-title">سايبر بانك (Cyberpunk)</div>
+                    <p style="color:#ccc; font-size:14px;">مستقبل بائس، نيون، وتكنولوجيا عالية.</p>
+                    <div class="prompt-text" onclick="copyPrompt(this)">
+                        cyberpunk art style, futuristic city, neon lights, high tech low life, mechanical details, vivid
+                        colors
+                        <span class="copy-hint">نسخ</span>
+                    </div>
+                </div>
+                <div class="prompt-card">
+                    <div class="prompt-title">أنمي / مانغا (Anime/Manga)</div>
+                    <p style="color:#ccc; font-size:14px;">رسومات يابانية مميزة.</p>
+                    <div class="prompt-text" onclick="copyPrompt(this)">
+                        anime art style, studio ghibli inspired, vibrant colors, detailed background, cel shading
+                        <span class="copy-hint">نسخ</span>
+                    </div>
+                </div>
+                <div class="prompt-card">
+                    <div class="prompt-title">فن بيكسل (Pixel Art)</div>
+                    <p style="color:#ccc; font-size:14px;">رسومات ألعاب قديمة (8-bit / 16-bit).</p>
+                    <div class="prompt-text" onclick="copyPrompt(this)">
+                        pixel art style, 16-bit graphics, retro game aesthetic, isometric view, limited color palette
+                        <span class="copy-hint">نسخ</span>
+                    </div>
+                </div>
+                <div class="prompt-card">
+                    <div class="prompt-title">رسم بالقلم الرصاص (Sketch)</div>
+                    <p style="color:#ccc; font-size:14px;">تخطيطات سريعة وأنيقة.</p>
+                    <div class="prompt-text" onclick="copyPrompt(this)">
+                        pencil sketch, charcoal drawing, rough lines, graphite texture, monochrome, artistic shading
+                        <span class="copy-hint">نسخ</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section: 3D & Isometric -->
+        <div class="prompt-section">
+            <h2>🧊 ثلاثي الأبعاد و آيسومتريك (3D & Isometric)</h2>
+            <div class="prompt-grid">
+                <div class="prompt-card">
+                    <div class="prompt-title">آيسومتريك (Isometric Room)</div>
+                    <p style="color:#ccc; font-size:14px;">غرف أو مباني مصغرة بزاوية علوية.</p>
+                    <div class="prompt-text" onclick="copyPrompt(this)">
+                        isometric 3d render, cutaway room, cute miniature, soft lighting, pastel colors, blender 3d
+                        style
+                        <span class="copy-hint">نسخ</span>
+                    </div>
+                </div>
+                <div class="prompt-card">
+                    <div class="prompt-title">Low Poly (مضلعات قليلة)</div>
+                    <p style="color:#ccc; font-size:14px;">ستايل هندسي بسيط وعصري.</p>
+                    <div class="prompt-text" onclick="copyPrompt(this)">
+                        low poly art, geometric shapes, minimalist 3d, flat shading, vibrant colors, abstract
+                        composition
+                        <span class="copy-hint">نسخ</span>
+                    </div>
+                </div>
+                <div class="prompt-card">
+                    <div class="prompt-title">صلصال (Claymorphism)</div>
+                    <p style="color:#ccc; font-size:14px;">شخصيات أو واجهات بملمس الصلصال.</p>
+                    <div class="prompt-text" onclick="copyPrompt(this)">
+                        claymorphism style, soft clay texture, rounded edges, plasticine look, stop motion animation
+                        style
+                        <span class="copy-hint">نسخ</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section: Logo & Icons -->
+        <div class="prompt-section">
+            <h2>💎 شعارات وأيقونات (Logos & Icons)</h2>
+            <div class="prompt-grid">
+                <div class="prompt-card">
+                    <div class="prompt-title">شعار مينياليست (Minimalist Logo)</div>
+                    <p style="color:#ccc; font-size:14px;">بسيط، خطوط نظيفة، وعصري.</p>
+                    <div class="prompt-text" onclick="copyPrompt(this)">
+                        minimalist logo design, vector graphics, simple lines, flat design, white background, modern
+                        typography
+                        <span class="copy-hint">نسخ</span>
+                    </div>
+                </div>
+                <div class="prompt-card">
+                    <div class="prompt-title">أيقونة تطبيق (App Icon)</div>
+                    <p style="color:#ccc; font-size:14px;">أيقونة مربعة بحواف دائرية (iOS style).</p>
+                    <div class="prompt-text" onclick="copyPrompt(this)">
+                        ios app icon design, rounded square, glossy finish, vibrant gradient, simple symbol, ui design
+                        <span class="copy-hint">نسخ</span>
+                    </div>
+                </div>
+                <div class="prompt-card">
+                    <div class="prompt-title">ماسكوت رياضي (Mascot Logo)</div>
+                    <p style="color:#ccc; font-size:14px;">للفرق الرياضية أو قنوات الألعاب.</p>
+                    <div class="prompt-text" onclick="copyPrompt(this)">
+                        esports mascot logo, fierce animal, vector illustration, bold outlines, aggressive style, team
+                        logo
+                        <span class="copy-hint">نسخ</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section: Web & UI Design -->
+        <div class="prompt-section">
+            <h2>📱 تصميم واجهات ومواقع (UI/UX)</h2>
+            <div class="prompt-grid">
+                <div class="prompt-card">
+                    <div class="prompt-title">صفحة هبوط (Landing Page)</div>
+                    <p style="color:#ccc; font-size:14px;">تصميم موقع كامل.</p>
+                    <div class="prompt-text" onclick="copyPrompt(this)">
+                        modern website landing page design, ui/ux, clean layout, hero section, call to action, figma
+                        style
+                        <span class="copy-hint">نسخ</span>
+                    </div>
+                </div>
+                <div class="prompt-card">
+                    <div class="prompt-title">تطبيق موبايل (Mobile App)</div>
+                    <p style="color:#ccc; font-size:14px;">واجهة تطبيق عصرية.</p>
+                    <div class="prompt-text" onclick="copyPrompt(this)">
+                        mobile app interface design, dark mode, sleek ui, dashboard analytics, user friendly,
+                        contemporary design
+                        <span class="copy-hint">نسخ</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section: Architecture & Interior -->
+        <div class="prompt-section">
+            <h2>🏠 هندسة معمارية وديكور (Architecture)</h2>
+            <div class="prompt-grid">
+                <div class="prompt-card">
+                    <div class="prompt-title">منزل مودرن (Modern House)</div>
+                    <p style="color:#ccc; font-size:14px;">واجهة خارجية بلمسات زجاجية.</p>
+                    <div class="prompt-text" onclick="copyPrompt(this)">
+                        modern minimalist house exterior, glass facade, concrete texture, surrounded by nature,
+                        architectural photography
+                        <span class="copy-hint">نسخ</span>
+                    </div>
+                </div>
+                <div class="prompt-card">
+                    <div class="prompt-title">ديكور داخلي (Interior Design)</div>
+                    <p style="color:#ccc; font-size:14px;">غرفة معيشة فاخرة.</p>
+                    <div class="prompt-text" onclick="copyPrompt(this)">
+                        luxury living room interior, scandinavian style, cozy atmosphere, natural light, high end
+                        furniture, photorealistic
+                        <span class="copy-hint">نسخ</span>
+                    </div>
+                </div>
+                <div class="prompt-card">
+                    <div class="prompt-title">مبنى مستقبلي (Futuristic)</div>
+                    <p style="color:#ccc; font-size:14px;">تصاميم عضوية ومبتكرة (Zaha Hadid Style).</p>
+                    <div class="prompt-text" onclick="copyPrompt(this)">
+                        futuristic skyscraper, parametric architecture, zaha hadid style, fluid curves, white material,
+                        blue sky background
+                        <span class="copy-hint">نسخ</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3 class="logo">
+                        <img src="../images/logo.svg" alt="TechnoMind" style="height: 32px; margin-left: 8px;">
+                        TechnoMind
+                    </h3>
+                    <p data-en="Your trusted guide to the world of AI and Technology. We simplify the complex.">
+                        دليلك الموثوق لعالم الذكاء الاصطناعي والتكنولوجيا. نبسط لك المعقد.
+                    </p>
+                </div>
+
+                <div class="footer-links">
+                    <h4 data-en="Quick Links">روابط سريعة</h4>
+                    <ul>
+                        <li><a href="../index.html" data-en="Home">الرئيسية</a></li>
+                        <li><a href="ai-simplified.html" data-en="AI Simplified">الذكاء الاصطناعي</a></li>
+                        <li><a href="apps-tools.html" data-en="Tools">الأدوات</a></li>
+                        <li><a href="contact.html" data-en="Contact">اتصل بنا</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4 data-en="TechnoMind Project">مشروع TechnoMind</h4>
+                    <ul>
+                        <li><a href="terms.html" data-en="Terms of Service">شروط الاستخدام</a></li>
+                        <li><a href="privacy.html" data-en="Privacy Policy">سياسة الخصوصية</a></li>
+                        <li>
+                            <div
+                                style="direction: ltr; justify-content: flex-start; display:inline-flex; gap:10px; color:var(--color-neutral-400);">
+                                <a href="javascript:void(0)" aria-label="Twitter" title="Twitter - Coming Soon"
+                                    onclick="if(typeof showToast==='function'){showToast('قريباً! / Coming Soon!','info')}else{alert('Coming Soon!')}"
+                                    style="text-decoration: none; color: inherit; transition: color 0.2s;"
+                                    onmouseover="this.style.color='#38BDF8'" onmouseout="this.style.color='inherit'">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l11.733 16h4.267l-11.733 -16h-4.267z"></path><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"></path></svg>
+                                </a>
+                                <a href="javascript:void(0)" aria-label="LinkedIn" title="LinkedIn - Coming Soon"
+                                    onclick="if(typeof showToast==='function'){showToast('قريباً! / Coming Soon!','info')}else{alert('Coming Soon!')}"
+                                    style="text-decoration: none; color: inherit; transition: color 0.2s;"
+                                    onmouseover="this.style.color='#0A66C2'" onmouseout="this.style.color='inherit'">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                                </a>
+                                <a href="javascript:void(0)" aria-label="Instagram" title="Instagram - Coming Soon"
+                                    onclick="if(typeof showToast==='function'){showToast('قريباً! / Coming Soon!','info')}else{alert('Coming Soon!')}"
+                                    style="text-decoration: none; color: inherit; transition: color 0.2s;"
+                                    onmouseover="this.style.color='#E1306C'" onmouseout="this.style.color='inherit'">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 TechnoMind. <span data-en="All rights reserved.">جميع الحقوق محفوظة.</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        function copyPrompt(element) {
+            // Get the text node content (ignoring the span)
+            let text = element.childNodes[0].nodeValue.trim();
+            navigator.clipboard.writeText(text).then(() => {
+                const originalBg = element.style.background;
+                element.style.background = '#064e3b'; // Dark Green
+                const hint = element.querySelector('.copy-hint');
+                hint.innerText = "تم النسخ!";
+
+                setTimeout(() => {
+                    element.style.background = originalBg;
+                    hint.innerText = "نسخ";
+                }, 1500);
+            });
+        }
+    </script>
+    <script src="../js/enhancements.js"></script>
+</body>
+
+</html>

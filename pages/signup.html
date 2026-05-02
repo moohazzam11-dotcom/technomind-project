@@ -1,0 +1,237 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إنشاء حساب - TechnoMind عربي</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/enhancements.css">
+    <style>
+        .auth-container {
+            max-width: 400px;
+            margin: 80px auto;
+            background: var(--bg-card, #ffffff);
+            border: 1px solid var(--bg-card-border, rgba(0,0,0,0.08));
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--color-neutral-300);
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--color-neutral-100, #ddd);
+            border-radius: 8px;
+            font-family: inherit;
+            background: var(--color-neutral-dark);
+            color: var(--color-neutral-600);
+        }
+
+        .toggle-auth {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .toggle-auth a {
+            color: var(--color-primary);
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn-social {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+            border: 1px solid var(--color-neutral-100, #ddd);
+            border-radius: 8px;
+            background: var(--bg-card, #ffffff);
+            color: var(--color-neutral-600);
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.2s;
+        }
+
+        .btn-social:hover {
+            background: var(--color-primary-lighter);
+            border-color: var(--color-primary);
+        }
+
+        .btn-social.google {
+            color: #db4437;
+        }
+
+        .btn-social.phone {
+            color: #2563eb;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../images/logo.svg">
+    <link rel="apple-touch-icon" href="../images/logo.png">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <a href="../index.html" class="logo">
+                <img src="../images/logo.svg" alt="TechnoMind" style="height: 40px; margin-left: 8px;"> TechnoMind
+            </a>
+
+            <div class="header-actions">
+                <!-- Language Toggle -->
+                <button class="icon-btn" onclick="toggleLanguage()" id="langBtn" title="Switch Language">
+                    <svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20"></path><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                    <span style="font-size: 14px; margin-right: 4px;">EN</span>
+                </button>
+
+                <!-- Theme Toggle -->
+                <button class="icon-btn" onclick="toggleTheme()" id="themeBtn" title="Toggle Theme"
+                    aria-label="Toggle Theme">
+                    <!-- Sun Icon (for dark mode by default) -->
+                    <svg class="icon-svg" viewBox="0 0 24 24" id="themeIconSvg">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+
+                <!-- Search Icon -->
+                <button class="icon-btn" aria-label="Search" onclick="toggleSearch()">
+                    <svg class="icon-svg" viewBox="0 0 24 24">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Signup Form -->
+        <div id="signup-form" class="auth-container">
+            <h2 style="text-align: center; margin-bottom: 30px;">إنشاء حساب جديد</h2>
+            <form onsubmit="handleSignup(event)">
+                <div class="form-group">
+                    <label for="name">الاسم الكامل</label>
+                    <input type="text" id="name" name="name" required placeholder="أدخل اسمك" autocomplete="name">
+                </div>
+                <div class="form-group">
+                    <label for="email">البريد الإلكتروني</label>
+                    <input type="email" id="email" name="email" required placeholder="example@email.com" autocomplete="email">
+                </div>
+                <div class="form-group">
+                    <label for="password">كلمة المرور</label>
+                    <input type="password" id="password" name="password" required placeholder="******" autocomplete="new-password">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">إنشاء حساب</button>
+                <div class="social-login">
+                    <p style="text-align:center; color:#888; margin: 16px 0;">أو</p>
+                    <button type="button" class="btn-social google" onclick="handleSocialLogin('google')">
+                        🔵 متابعة باستخدام Google
+                    </button>
+                    <button type="button" class="btn-social phone" onclick="handleSocialLogin('phone')">
+                        📱 متابعة باستخدام رقم الهاتف
+                    </button>
+                </div>
+            </form>
+            <div class="toggle-auth">
+                لديك حساب بالفعل؟ <a onclick="toggleForm()">تسجيل الدخول</a>
+            </div>
+        </div>
+
+        <!-- Login Form (Hidden by default) -->
+        <div id="login-form" class="auth-container" style="display: none;">
+            <h2 style="text-align: center; margin-bottom: 30px;">تسجيل الدخول</h2>
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="login-email">البريد الإلكتروني</label>
+                    <input type="email" id="login-email" name="email" required autocomplete="email">
+                </div>
+                <div class="form-group">
+                    <label for="login-password">كلمة المرور</label>
+                    <input type="password" id="login-password" name="password" required autocomplete="current-password">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">دخول</button>
+            </form>
+            <div class="toggle-auth">
+                ليس لديك حساب؟ <a onclick="toggleForm()">إنشاء حساب جديد</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleForm() {
+            const signup = document.getElementById('signup-form');
+            const login = document.getElementById('login-form');
+
+            if (signup.style.display === 'none') {
+                signup.style.display = 'block';
+                login.style.display = 'none';
+            } else {
+                signup.style.display = 'none';
+                login.style.display = 'block';
+            }
+        }
+
+        function handleSignup(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            const result = Auth.signup(name, email, password);
+            if (result.success) {
+                if(typeof showToast==='function'){showToast('تم إنشاء الحساب بنجاح!','success')}else{alert('تم إنشاء الحساب بنجاح!')}
+                window.location.href = '../index.html';
+            } else {
+                if(typeof showToast==='function'){showToast(result.message,'warning')}else{alert(result.message)}
+            }
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+
+            const result = Auth.login(email, password);
+            if (result.success) {
+                if(typeof showToast==='function'){showToast('مرحباً بك ' + result.user.name,'success')}else{alert('مرحباً بك ' + result.user.name)}
+                window.location.href = '../index.html';
+            } else {
+                if(typeof showToast==='function'){showToast(result.message,'warning')}else{alert(result.message)}
+            }
+        }
+
+        function handleSocialLogin(provider) {
+            const result = Auth.socialLogin(provider);
+            if (result.success) {
+                if(typeof showToast==='function'){showToast(`Welcome ${result.user.name}!`,'success')}else{alert(`Welcome ${result.user.name}!`)}
+                window.location.href = '../index.html';
+            }
+        }
+    </script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/lang.js"></script>
+    <script src="../js/enhancements.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#38BDF8;stop-opacity:1" /> <!-- Sky 400 -->
+      <stop offset="50%" style="stop-color:#0EA5E9;stop-opacity:1" /> <!-- Sky 500 -->
+      <stop offset="100%" style="stop-color:#6366F1;stop-opacity:1" /> <!-- Indigo 500 -->
+    </linearGradient>
+    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="15" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Modern Neural Hexagon -->
+  <g transform="translate(256, 256)">
+    <!-- Main Hex Shape -->
+    <path d="M0 -220 L190.5 -110 L190.5 110 L0 220 L-190.5 110 L-190.5 -110 Z" 
+          fill="none" stroke="url(#grad2)" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"
+          filter="url(#softGlow)" opacity="0.4"/>
+    
+    <path d="M0 -220 L190.5 -110 L190.5 110 L0 220 L-190.5 110 L-190.5 -110 Z" 
+          fill="none" stroke="url(#grad2)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- Abstract "T" / Mind Circuit -->
+    <path d="M-100 -80 H100 M0 -80 V120" 
+          stroke="white" stroke-width="40" stroke-linecap="round" 
+          filter="url(#softGlow)" />
+          
+    <path d="M-100 -80 H100 M0 -80 V120" 
+          stroke="url(#grad2)" stroke-width="20" stroke-linecap="round" />
+
+    <!-- Neural Nodes -->
+    <circle cx="-100" cy="-80" r="25" fill="white" />
+    <circle cx="100" cy="-80" r="25" fill="white" />
+    <circle cx="0" cy="120" r="25" fill="white" />
+    
+    <!-- Central Pulse -->
+    <circle cx="0" cy="0" r="40" fill="url(#grad2)" opacity="0.8">
+        <animate attributeName="r" values="30;45;30" dur="4s" repeatCount="indefinite" />
+        <animate attributeName="opacity" values="0.8;0.4;0.8" dur="4s" repeatCount="indefinite" />
+    </circle>
+  </g>
+</svg>

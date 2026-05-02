@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المدونة - TechnoMind عربي</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/enhancements.css">
+    <link rel="icon" type="image/svg+xml" href="../images/logo.svg">
+    <link rel="apple-touch-icon" href="../images/logo.png">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <a href="../index.html" class="logo">🧠 TechnoMind عربي</a>
+            <nav class="nav-links">
+                <a href="../index.html">الرئيسية</a>
+                <a href="../pages/ai-simplified.html">الذكاء الاصطناعي</a>
+                <a href="../pages/apps-tools.html">الأدوات</a>
+                <a href="../pages/tools-hub.html" style="font-weight: bold; color: var(--color-primary);">مركز
+                    الأدوات</a>
+                <a href="../pages/make-money.html">الربح</a>
+                <a href="../pages/contact.html">اتصل بنا</a>
+            </nav>
+
+            <div class="header-actions">
+                <!-- Language Toggle -->
+                <button class="icon-btn" onclick="toggleLanguage()" id="langBtn" title="Switch Language">
+                    🌐 <span style="font-size: 14px; margin-right: 4px;">EN</span>
+                </button>
+
+                <!-- Theme Toggle -->
+                <button class="icon-btn" onclick="toggleTheme()" id="themeBtn" title="Toggle Theme"
+                    aria-label="Toggle Theme">
+                    <!-- Sun Icon (for dark mode by default) -->
+                    <svg class="icon-svg" viewBox="0 0 24 24" id="themeIconSvg">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+
+                <!-- Search Icon -->
+                <button class="icon-btn" aria-label="Search" onclick="toggleSearch()">
+                    <svg class="icon-svg" viewBox="0 0 24 24">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
+
+                <!-- Hamburger Menu -->
+                <button class="icon-btn" onclick="toggleMainMenu()" aria-label="Toggle Menu">
+                    <svg class="icon-svg" viewBox="0 0 24 24">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container" style="padding: 80px 0;">
+        <h1>أحدث المقالات</h1>
+        <p>استكشف جميع مقالاتنا وشروحاتنا.</p>
+
+        <div
+            style="margin-top: 40px; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px;">
+            <a href="../pages/article-web-dev-ai.html" class="card"
+                style="display: block; text-decoration: none; color: inherit;">
+                <h3>كيف تبني موقعاً بالذكاء الاصطناعي</h3>
+                <p>الذكاء الاصطناعي</p>
+                <span style="color: var(--color-primary); display: block; margin-top: 16px;">اقرأ المزيد ←</span>
+            </a>
+            <a href="../pages/article-chatgpt.html" class="card"
+                style="display: block; text-decoration: none; color: inherit;">
+                <h3>دليل ChatGPT الشامل</h3>
+                <p>الذكاء الاصطناعي</p>
+                <span style="color: var(--color-primary); display: block; margin-top: 16px;">اقرأ المزيد ←</span>
+            </a>
+            <a href="../pages/article-tools.html" class="card"
+                style="display: block; text-decoration: none; color: inherit;">
+                <h3>أفضل 10 أدوات AI</h3>
+                <p>الأدوات</p>
+                <span style="color: var(--color-primary); display: block; margin-top: 16px;">اقرأ المزيد ←</span>
+            </a>
+            <a href="../pages/article-earn.html" class="card"
+                style="display: block; text-decoration: none; color: inherit;">
+                <h3>الربح من العمل الحر</h3>
+                <p>الربح</p>
+                <span style="color: var(--color-primary); display: block; margin-top: 16px;">اقرأ المزيد ←</span>
+            </a>
+        </div>
+    </div>
+    </div>
+
+    <!-- Footer -->
+    <footer style="background-color: var(--color-neutral-dark); color: white; padding: 60px 0;">
+        <div class="container"
+            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px;">
+            <div>
+                <h3>TechnoMind عربي</h3>
+                <p style="color: var(--color-neutral-400); margin-top: 16px;">دليلك الذكي لعالم التقنية والذكاء
+                    الاصطناعي.</p>
+            </div>
+            <div>
+                <h4>روابط سريعة</h4>
+                <ul style="margin-top: 16px; display: flex; flex-direction: column; gap: 8px;">
+                    <li><a href="../index.html" style="color: var(--color-neutral-400);">الرئيسية</a></li>
+                    <li><a href="../pages/about.html" style="color: var(--color-neutral-400);">من نحن</a></li>
+                    <li><a href="../pages/contact.html" style="color: var(--color-neutral-400);">اتصل بنا</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>الأقسام</h4>
+                <ul style="margin-top: 16px; display: flex; flex-direction: column; gap: 8px;">
+                    <li><a href="../pages/ai-simplified.html" style="color: var(--color-neutral-400);">الذكاء
+                            الاصطناعي</a>
+                    </li>
+                    <li><a href="../pages/apps-tools.html" style="color: var(--color-neutral-400);">الأدوات</a></li>
+                    <li><a href="../pages/make-money.html" style="color: var(--color-neutral-400);">الربح</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container"
+            style="margin-top: 60px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; text-align: center; color: var(--color-neutral-400);">
+            © 2026 TechnoMind عربي. جميع الحقوق محفوظة.
+        </div>
+    </footer>
+    <script src="../js/main.js"></script>
+    <script src="../js/enhancements.js"></script>
+</body>
+
+</html>

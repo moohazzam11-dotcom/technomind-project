@@ -1,0 +1,22 @@
+{
+    "name": "TechnoMind عربي",
+    "short_name": "TechnoMind",
+    "description": "دليلك الذكي لعالم التقنية والذكاء الاصطناعي — Your Smart Guide to AI & Technology",
+    "start_url": "/index.html",
+    "scope": "/",
+    "display": "standalone",
+    "background_color": "#020617",
+    "theme_color": "#38BDF8",
+    "dir": "rtl",
+    "lang": "ar",
+    "orientation": "any",
+    "icons": [
+        {
+            "src": "images/logo.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        }
+    ],
+    "categories": ["education", "technology"]
+}
