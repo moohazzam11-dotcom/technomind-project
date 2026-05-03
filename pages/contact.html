@@ -111,12 +111,27 @@
         <h1>اتصل بنا</h1>
         <p>لديك استفسار؟ نحن هنا للمساعدة.</p>
 
-        <form id="contactForm" style="margin-top: 40px; display: flex; flex-direction: column; gap: 16px;" onsubmit="event.preventDefault(); if(typeof showToast==='function'){showToast('شكراً! تم إرسال رسالتك بنجاح 🎉 / Message sent!','success')}; this.reset();">
-            <input type="text" placeholder="الاسم" required style="padding: 14px 16px; border: 1px solid rgba(255,255,255,0.15); border-radius: 12px; background: rgba(255,255,255,0.05); color: inherit; font-family: inherit; font-size: 15px; outline: none; transition: border-color 0.2s;" onfocus="this.style.borderColor='var(--color-primary)'" onblur="this.style.borderColor='rgba(255,255,255,0.15)'">
-            <input type="email" placeholder="البريد الإلكتروني" required style="padding: 14px 16px; border: 1px solid rgba(255,255,255,0.15); border-radius: 12px; background: rgba(255,255,255,0.05); color: inherit; font-family: inherit; font-size: 15px; outline: none; transition: border-color 0.2s;" onfocus="this.style.borderColor='var(--color-primary)'" onblur="this.style.borderColor='rgba(255,255,255,0.15)'">
-            <textarea placeholder="رسالتك" rows="5" required style="padding: 14px 16px; border: 1px solid rgba(255,255,255,0.15); border-radius: 12px; background: rgba(255,255,255,0.05); color: inherit; font-family: inherit; font-size: 15px; outline: none; resize: vertical; transition: border-color 0.2s;" onfocus="this.style.borderColor='var(--color-primary)'" onblur="this.style.borderColor='rgba(255,255,255,0.15)'"></textarea>
+        <form id="contactForm" name="contact" method="POST" netlify data-netlify="true" action="/pages/contact.html?success=1" style="margin-top: 40px; display: flex; flex-direction: column; gap: 16px;">
+            <input type="hidden" name="form-name" value="contact" />
+            <input type="text" name="name" placeholder="الاسم" required style="padding: 14px 16px; border: 1px solid rgba(255,255,255,0.15); border-radius: 12px; background: rgba(255,255,255,0.05); color: inherit; font-family: inherit; font-size: 15px; outline: none; transition: border-color 0.2s;" onfocus="this.style.borderColor='var(--color-primary)'" onblur="this.style.borderColor='rgba(255,255,255,0.15)'">
+            <input type="email" name="email" placeholder="البريد الإلكتروني" required style="padding: 14px 16px; border: 1px solid rgba(255,255,255,0.15); border-radius: 12px; background: rgba(255,255,255,0.05); color: inherit; font-family: inherit; font-size: 15px; outline: none; transition: border-color 0.2s;" onfocus="this.style.borderColor='var(--color-primary)'" onblur="this.style.borderColor='rgba(255,255,255,0.15)'">
+            <textarea name="message" placeholder="رسالتك" rows="5" required style="padding: 14px 16px; border: 1px solid rgba(255,255,255,0.15); border-radius: 12px; background: rgba(255,255,255,0.05); color: inherit; font-family: inherit; font-size: 15px; outline: none; resize: vertical; transition: border-color 0.2s;" onfocus="this.style.borderColor='var(--color-primary)'" onblur="this.style.borderColor='rgba(255,255,255,0.15)'"></textarea>
             <button type="submit" class="btn btn-primary" style="padding: 14px; font-size: 16px; border-radius: 12px;">إرسال الرسالة ✉️</button>
         </form>
+
+        <!-- Shown after Netlify redirects back with ?success=1 -->
+        <div id="successMsg" style="display:none; margin-top:40px; padding:32px; background:rgba(52,211,153,0.1); border:1px solid rgba(52,211,153,0.3); border-radius:16px; text-align:center;">
+            <div style="font-size:48px; margin-bottom:16px;">✅</div>
+            <h2 style="color:#34d399; margin-bottom:8px;">شكراً على رسالتك!</h2>
+            <p style="color:var(--color-neutral-400);">تم إرسال رسالتك بنجاح. سنرد عليك في أقرب وقت ممكن.</p>
+            <p style="color:var(--color-neutral-400); font-size:14px;">Message sent! We'll get back to you soon.</p>
+        </div>
+        <script>
+            if (new URLSearchParams(location.search).get('success') === '1') {
+                document.getElementById('successMsg').style.display = 'block';
+                document.getElementById('contactForm').style.display = 'none';
+            }
+        </script>
     </div>
     <!-- Footer -->
     <footer>
