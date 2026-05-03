@@ -24,6 +24,41 @@
 @media (max-width: 900px) {
     .hf-grid {
         grid-template-columns: 1fr;
+        gap: 20px;
+        margin-top: 32px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Issue 13: Section padding */
+    .hf-courses-section {
+        padding: 40px 0;
+        min-height: auto;
+    }
+
+    /* Issue 10: Card adjustments on tablet */
+    .hf-card {
+        min-height: auto;
+        padding: 24px;
+    }
+
+    /* Allow card content to use full width since illustration overlaps less */
+    .hf-card-content {
+        max-width: 100%;
+    }
+
+    .hf-card h3 {
+        font-size: 22px;
+    }
+
+    /* Keep illustration but make it smaller so it doesn't dominate */
+    .hf-card-illustration {
+        width: 120px;
+        height: 120px;
+        font-size: 90px;
+        bottom: -12px;
+        left: -12px;
+        opacity: 0.5;
     }
 }
 
@@ -36,8 +71,8 @@
     padding: 32px;
     position: relative;
     overflow: hidden;
-    height: 320px;
-    /* Fixed height like HF */
+    min-height: 320px;
+    /* Issue 10: was fixed height — min-height lets content expand on mobile */
     display: flex;
     flex-direction: column;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);

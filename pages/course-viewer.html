@@ -103,6 +103,50 @@
             }
         }
 
+        /* Issue 2: Collapsible sidebar on mobile */
+        @media (max-width: 768px) {
+            .sidebar-toggle-btn {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                width: 100%;
+                padding: 12px 16px;
+                background: rgba(56, 189, 248, 0.08);
+                border: 1px solid rgba(56, 189, 248, 0.2);
+                border-radius: 10px;
+                color: var(--color-primary, #38BDF8);
+                font-family: inherit;
+                font-size: 15px;
+                font-weight: 600;
+                cursor: pointer;
+                margin-bottom: 20px;
+                justify-content: space-between;
+            }
+            .sidebar-toggle-btn:hover {
+                background: rgba(56, 189, 248, 0.15);
+            }
+            .course-sidebar {
+                padding: 16px;
+            }
+            #courseSidebarWrapper.sidebar-collapsed #courseSidebar {
+                display: none;
+            }
+            .sidebar-toggle-btn .toggle-arrow {
+                transition: transform 0.25s ease;
+            }
+            #courseSidebarWrapper.sidebar-collapsed .toggle-arrow {
+                transform: rotate(-90deg);
+            }
+            .course-content {
+                padding: 20px 16px;
+            }
+        }
+        @media (min-width: 769px) {
+            .sidebar-toggle-btn {
+                display: none;
+            }
+        }
+
         .lesson-header {
             display: flex;
             justify-content: space-between;
@@ -156,8 +200,16 @@
 
     <div class="course-container">
         <!-- Sidebar -->
-        <aside class="course-sidebar" id="courseSidebar">
-            <!-- Injected by JS -->
+        <aside class="course-sidebar" id="courseSidebarWrapper">
+            <button class="sidebar-toggle-btn" onclick="toggleCourseSidebar()" aria-expanded="true" aria-controls="courseSidebar">
+                <span>📋 قائمة الدروس / Lessons</span>
+                <svg class="toggle-arrow icon-svg" viewBox="0 0 24 24" style="width:18px;height:18px;">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </button>
+            <div id="courseSidebar">
+                <!-- Injected by JS -->
+            </div>
         </aside>
 
         <!-- Main Content -->
@@ -182,6 +234,15 @@
             </div>
         </main>
     </div>
+
+    <script>
+        function toggleCourseSidebar() {
+            const wrapper = document.getElementById('courseSidebarWrapper');
+            const btn = wrapper.querySelector('.sidebar-toggle-btn');
+            const isCollapsed = wrapper.classList.toggle('sidebar-collapsed');
+            btn.setAttribute('aria-expanded', String(!isCollapsed));
+        }
+    </script>
 
     <!-- Scripts -->
     <script src="../js/data/courses.js"></script>

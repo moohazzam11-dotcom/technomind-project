@@ -1828,3 +1828,276 @@ body.light-mode .quick-pill:hover {
         padding: 24px;
     }
 }
+
+/* ========================================================================
+   MOBILE RESPONSIVE FIXES
+   Issues 1–23 from audit — CSS-only where possible, !important used only
+   to override inline style="" attributes that cannot be changed in HTML.
+   ======================================================================== */
+
+/* ---- Tablet & below (≤ 768px) ---- */
+@media (max-width: 768px) {
+
+    /* Issue 1: Hero H1 in CSS class */
+    .hero h1,
+    .hero-title {
+        font-size: 36px !important;
+        letter-spacing: -0.5px;
+        line-height: 1.15;
+    }
+
+    /* Issue 1b: Page-level h1/h2 with hardcoded inline font-size */
+    h1[style*="font-size"] {
+        font-size: 28px !important;
+        line-height: 1.2;
+    }
+    h2[style*="font-size"] {
+        font-size: 22px !important;
+    }
+
+    /* Issue 3: Hero search bar — fill container on narrow screens */
+    .hero-search-container {
+        max-width: 100%;
+    }
+
+    /* Issue 7: Hero buttons — wrap so they don't overflow side by side */
+    .hero-buttons {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+    }
+    .hero-buttons .btn {
+        flex: 1 1 180px;
+    }
+
+    /* Issue 8: Hero stats — 2-column grid instead of single flex row */
+    .hero-stats {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        text-align: center;
+    }
+    .stat-item {
+        flex: none;
+    }
+    .stat-item h3 {
+        font-size: 26px;
+    }
+
+    /* Issue 9: Footer — reduce padding, collapse 3-col earlier */
+    footer {
+        padding: 48px 0 24px;
+        margin-top: 40px;
+    }
+    .footer-content {
+        gap: 32px;
+    }
+
+    /* Issue 11: Course card featured — limit thumbnail height on tablet */
+    .course-thumb-wrapper {
+        height: 180px;
+    }
+
+    /* Issue 13: Sections with 80px vertical padding — reduce to 40px */
+    [style*="padding: 80px 0"] {
+        padding-top: 40px !important;
+        padding-bottom: 40px !important;
+    }
+
+    /* Issues 20 & 22: 100px / 120px top padding — reduce */
+    [style*="padding-top: 100px"] {
+        padding-top: 32px !important;
+    }
+    [style*="padding: 100px 0"] {
+        padding-top: 40px !important;
+        padding-bottom: 40px !important;
+    }
+    [style*="padding: 120px 0"] {
+        padding-top: 40px !important;
+        padding-bottom: 40px !important;
+    }
+    [style*="padding: 100px 0 60px"] {
+        padding-top: 40px !important;
+        padding-bottom: 32px !important;
+    }
+
+    /* Issue 14: Hero paragraph */
+    .hero p {
+        font-size: 17px;
+        margin-bottom: 32px;
+    }
+
+    /* Issue 17: Form inputs — 44px minimum touch target; 16px prevents
+       iOS Safari from auto-zooming when an input is focused */
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="tel"],
+    input[type="search"],
+    input[type="number"],
+    textarea,
+    select {
+        min-height: 44px;
+        font-size: 16px !important;
+    }
+
+    /* Issue 19: Header actions gap on narrow screens */
+    .header-actions {
+        gap: 10px;
+    }
+
+    /* Issue 23: Padded form cards (e.g. submit-tool.html) */
+    .card[style*="padding: 40px"] {
+        padding: 24px !important;
+    }
+
+    /* Issue 24: Hero min-height — override inline style="min-height: 90vh" */
+    .hero {
+        min-height: 60vh !important;
+        padding-top: 40px !important;
+        padding-bottom: 40px !important;
+    }
+
+    /* Issue 25: Hero content max-width — override inline style="max-width: 900px" */
+    .hero-content {
+        max-width: 100% !important;
+        padding: 0 4px;
+    }
+
+    /* Issue 26: Roadmap hero — padding set in CSS (not inline), not caught by [style*=] */
+    .roadmap-hero {
+        padding: 40px 0 24px !important;
+    }
+
+    /* Issue 27: Section flex header rows — "title + CTA button" rows need to wrap */
+    div[style*="justify-content: space-between"][style*="margin-bottom"] {
+        flex-wrap: wrap !important;
+        gap: 16px !important;
+    }
+
+    /* Issue 28: Hero heading max-width wrappers (e.g. max-width: 800px center divs) */
+    div[style*="max-width: 800px"],
+    div[style*="max-width: 700px"] {
+        max-width: 100% !important;
+    }
+
+    /* Issue 29: Reduce icon-btn padding so 4 buttons fit beside logo on ≤768px */
+    .icon-btn {
+        padding: 8px;
+    }
+}
+
+/* ---- Phone (≤ 480px) ---- */
+@media (max-width: 480px) {
+
+    /* Tighter container side padding on small phones */
+    .container {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    /* Issue 1: Smaller hero headline on phones */
+    .hero h1,
+    .hero-title {
+        font-size: 26px !important;
+    }
+
+    /* Issue 1b: Page h1 on phones */
+    h1[style*="font-size"] {
+        font-size: 24px !important;
+    }
+
+    /* Issue 6 on phones: h2 headings */
+    h2[style*="font-size"] {
+        font-size: 20px !important;
+    }
+
+    /* Issue 14: Hero description on phones */
+    .hero p {
+        font-size: 16px;
+    }
+
+    /* Issue 8: Hero stats on phones */
+    .hero-stats {
+        gap: 12px;
+    }
+    .stat-item h3 {
+        font-size: 22px;
+    }
+
+    /* Issue 7: Stack buttons vertically on small phones */
+    .hero-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .hero-buttons .btn {
+        flex: none;
+        width: 100%;
+    }
+
+    /* Cards — tighter padding on phones */
+    .card {
+        padding: 20px;
+        border-radius: 16px;
+    }
+
+    /* Issue 4: Mini tools grid — 2-column on phones */
+    .tools-grid-home {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+    .tool-card-mini {
+        padding: 16px 10px;
+    }
+    .tool-icon-circle {
+        width: 48px;
+        height: 48px;
+        font-size: 22px;
+    }
+
+    /* Issue 16: Stat numbers */
+    .stat-item h3 {
+        font-size: 20px;
+    }
+
+    /* Footer */
+    .footer-bottom {
+        font-size: 13px;
+    }
+
+    /* Issue 30: Logo text overflow — hide "TechnoMind" text on small phones,
+       keep the SVG image. font-size:0 collapses the text node to zero width. */
+    .logo {
+        font-size: 0 !important;
+        gap: 0 !important;
+    }
+    .logo img {
+        margin-left: 0 !important;
+    }
+
+    /* Issue 31: Icon-btn even tighter on very small phones */
+    .icon-btn {
+        padding: 7px;
+    }
+
+    /* Issue 32: Goal grid on roadmap — force single column */
+    .goal-grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 12px !important;
+    }
+    .goal-card {
+        padding: 16px !important;
+    }
+
+    /* Issue 33: Timeline items on roadmap — full width on phone */
+    .timeline-item {
+        width: 100% !important;
+        padding-right: 56px !important;
+        padding-left: 16px !important;
+    }
+
+    /* Issue 34: hf-grid force 1 column */
+    .hf-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
